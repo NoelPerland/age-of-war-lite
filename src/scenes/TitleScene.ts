@@ -23,9 +23,14 @@ export class TitleScene extends Phaser.Scene {
 
     this.add.rectangle(width / 2, height / 2, width, height, 0x142033, 1)
     this.drawBattlefieldBackdrop(width, height)
+    this.add
+      .image(width / 2, height / 2, 'chrono-screen-home')
+      .setDisplaySize(width, height)
+      .setAlpha(0.1)
+      .setDepth(0.5)
 
     const panel = this.add
-      .rectangle(width / 2, 322, 800, 430, 0xf4ecd6, 0.96)
+      .rectangle(width / 2, 322, 800, 430, 0xf4ecd6, 0.92)
       .setStrokeStyle(4, 0x4f3720, 0.66)
     panel.setDepth(1)
     this.add

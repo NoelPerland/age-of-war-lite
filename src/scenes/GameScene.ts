@@ -343,6 +343,19 @@ export class GameScene extends Phaser.Scene {
       base.shell = lower as Phaser.GameObjects.Rectangle
     }
 
+    const artKey = base.age === 1 ? 'base-player-age1-art' : base.age === 2 ? 'base-player-age2-art' : 'base-player-age3-art'
+    if (this.textures.exists(artKey)) {
+      const art = this.add.image(0, base.age === 3 ? 8 : 18, artKey)
+      art.setDisplaySize(base.age === 3 ? 172 : 154, base.age === 3 ? 114 : 108)
+      art.setDepth(2)
+      badge.setDepth(8)
+      art.setFlipX(!isPlayer)
+      if (!isPlayer) {
+        art.setTint(0xffb0a0)
+      }
+      parts.push(art)
+    }
+
     base.body.add(parts)
     base.core = core
     base.badge = badge
@@ -1139,6 +1152,10 @@ export class GameScene extends Phaser.Scene {
 
     const overlay = this.add.container(GAME_WIDTH / 2, GAME_HEIGHT / 2)
     const shade = this.add.rectangle(0, 0, GAME_WIDTH, GAME_HEIGHT, 0x050913, 0.58)
+    const resultArt = this.add
+      .image(0, 0, 'chrono-screen-end')
+      .setDisplaySize(GAME_WIDTH, GAME_HEIGHT)
+      .setAlpha(0.1)
     const halo = this.add.ellipse(0, -80, 520, 120, result === 'victory' ? 0x69d8d2 : 0xe19b77, 0.14)
     const backdrop = this.add.rectangle(0, 0, 590, 340, 0xf3e7cc, 0.98).setStrokeStyle(
       4,
@@ -1186,7 +1203,7 @@ export class GameScene extends Phaser.Scene {
       .setOrigin(0.5)
     footer.setPosition(0, 150)
     footer.setText('R restart / T title')
-    overlay.add([shade, halo, backdrop, inner, topRule, title, tag, body, restartButton, titleButton, footer])
+    overlay.add([shade, resultArt, halo, backdrop, inner, topRule, title, tag, body, restartButton, titleButton, footer])
     overlay.setDepth(30)
     this.resultOverlay = overlay
   }

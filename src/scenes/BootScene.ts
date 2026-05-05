@@ -161,9 +161,82 @@ function drawProjectileTexture(
   graphics.destroy()
 }
 
+function createSheetTexture(
+  scene: Phaser.Scene,
+  key: string,
+  sourceKey: string,
+  sx: number,
+  sy: number,
+  sw: number,
+  sh: number,
+  width: number,
+  height: number,
+) {
+  const source = scene.textures.get(sourceKey).getSourceImage() as HTMLImageElement
+  const texture = scene.textures.createCanvas(key, width, height)
+  if (!texture) {
+    return
+  }
+  const context = texture.getContext()
+  context.clearRect(0, 0, width, height)
+
+  const scale = Math.min(width / sw, height / sh)
+  const dw = Math.round(sw * scale)
+  const dh = Math.round(sh * scale)
+  const dx = Math.round((width - dw) / 2)
+  const dy = Math.round((height - dh) / 2)
+  context.drawImage(source, sx, sy, sw, sh, dx, dy, dw, dh)
+
+  const image = context.getImageData(0, 0, width, height)
+  for (let index = 0; index < image.data.length; index += 4) {
+    const red = image.data[index]
+    const green = image.data[index + 1]
+    const blue = image.data[index + 2]
+    if (red > 232 && green > 232 && blue > 226) {
+      image.data[index + 3] = 0
+    } else if (red > 214 && green > 214 && blue > 208) {
+      image.data[index + 3] = Math.min(image.data[index + 3], 120)
+    }
+  }
+  context.putImageData(image, 0, 0)
+  texture.refresh()
+}
+
+function createGeneratedArtTextures(scene: Phaser.Scene) {
+  const unitCrops: Record<string, [number, number, number, number]> = {
+    'player-scrapper': [48, 138, 112, 152],
+    'player-pulse-gunner': [1042, 132, 150, 146],
+    'player-bulwark': [452, 118, 120, 168],
+    'player-arc-caster': [878, 132, 142, 146],
+    'player-raider': [624, 118, 132, 168],
+    'player-siege-engine': [1012, 132, 166, 146],
+    'enemy-scrapper': [48, 444, 120, 164],
+    'enemy-pulse-gunner': [1044, 442, 152, 150],
+    'enemy-bulwark': [452, 432, 124, 168],
+    'enemy-arc-caster': [598, 432, 140, 168],
+    'enemy-raider': [856, 442, 142, 150],
+    'enemy-siege-engine': [1018, 442, 170, 150],
+  }
+
+  Object.entries(unitCrops).forEach(([key, crop]) => {
+    createSheetTexture(scene, key, 'chrono-sprite-design', crop[0], crop[1], crop[2], crop[3], UNIT_TEXTURE_WIDTH, UNIT_TEXTURE_HEIGHT)
+  })
+
+  createSheetTexture(scene, 'base-player-age1-art', 'chrono-sprite-design', 30, 774, 248, 198, 178, 126)
+  createSheetTexture(scene, 'base-player-age2-art', 'chrono-sprite-design', 344, 774, 250, 198, 178, 126)
+  createSheetTexture(scene, 'base-player-age3-art', 'chrono-sprite-design', 836, 760, 340, 220, 190, 126)
+}
+
 export class BootScene extends Phaser.Scene {
   constructor() {
     super('boot')
+  }
+
+  preload() {
+    this.load.image('chrono-sprite-design', '/assets/ui/chrono-siege-sprite-design.png')
+    this.load.image('chrono-screen-design', '/assets/ui/chrono-siege-screen-design.png')
+    this.load.image('chrono-screen-home', '/assets/ui/chrono-screen-home.png')
+    this.load.image('chrono-screen-end', '/assets/ui/chrono-screen-end.png')
   }
 
   create() {
@@ -171,6 +244,8 @@ export class BootScene extends Phaser.Scene {
       drawUnitTexture(this, `player-${unit.id}`, unit, 'player')
       drawUnitTexture(this, `enemy-${unit.id}`, unit, 'enemy')
     }
+
+    createGeneratedArtTextures(this)
 
     drawProjectileTexture(this, 'proj-player', 0x9efcff, 'melee')
     drawProjectileTexture(this, 'proj-enemy', 0xffb09d, 'melee')
