@@ -1150,6 +1150,17 @@ export class GameScene extends Phaser.Scene {
     this.registry.set('globalState', this.state)
     this.state.audio.play(result === 'victory' ? 'victory' : 'defeat')
 
+    const generatedOverlay = this.add.container(GAME_WIDTH / 2, GAME_HEIGHT / 2)
+    const generatedResultArt = this.add.image(0, 0, 'chrono-screen-end').setDisplaySize(GAME_WIDTH, GAME_HEIGHT)
+    const generatedRestartZone = this.add.zone(-142, 144, 210, 62).setInteractive({ cursor: 'pointer' })
+    generatedRestartZone.on('pointerup', () => this.scene.restart())
+    const generatedTitleZone = this.add.zone(150, 144, 210, 62).setInteractive({ cursor: 'pointer' })
+    generatedTitleZone.on('pointerup', () => this.scene.start('title'))
+    generatedOverlay.add([generatedResultArt, generatedRestartZone, generatedTitleZone])
+    generatedOverlay.setDepth(30)
+    this.resultOverlay = generatedOverlay
+    return
+
     const overlay = this.add.container(GAME_WIDTH / 2, GAME_HEIGHT / 2)
     const shade = this.add.rectangle(0, 0, GAME_WIDTH, GAME_HEIGHT, 0x050913, 0.58)
     const resultArt = this.add

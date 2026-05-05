@@ -77,9 +77,9 @@ export const BASE_HIT_FLASH_DURATION = 120
 export const AGE_EVENT_DURATION = 920
 export const SPAWN_BURST_DURATION = 320
 export const UNIT_STOP_BUFFER = 18
-export const UNIT_RENDER_SCALE = 1.3
-export const UNIT_TEXTURE_WIDTH = 82
-export const UNIT_TEXTURE_HEIGHT = 60
+export const UNIT_RENDER_SCALE = 0.82
+export const UNIT_TEXTURE_WIDTH = 128
+export const UNIT_TEXTURE_HEIGHT = 128
 
 export const AGE_NAMES = ['Neon Dawn', 'Circuit Forge', 'Nova Dominion']
 

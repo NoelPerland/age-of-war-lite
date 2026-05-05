@@ -173,6 +173,9 @@ function createSheetTexture(
   height: number,
 ) {
   const source = scene.textures.get(sourceKey).getSourceImage() as HTMLImageElement
+  if (scene.textures.exists(key)) {
+    scene.textures.remove(key)
+  }
   const texture = scene.textures.createCanvas(key, width, height)
   if (!texture) {
     return
