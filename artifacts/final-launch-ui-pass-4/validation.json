@@ -1,0 +1,27 @@
+{
+  "saved": {
+    "bestScore": 0,
+    "bestAgeReached": 1,
+    "muted": false,
+    "difficulty": "hard"
+  },
+  "state": {
+    "difficulty": "hard",
+    "playerGold": 191.72086666666664,
+    "enemyGold": 176.56008072000068,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1280,
+    "enemyBaseHp": 1280,
+    "playerUnits": [],
+    "enemyUnits": [
+      "scrapper"
+    ],
+    "gameEnded": false,
+    "overlayVisible": false,
+    "score": 0,
+    "muted": false
+  },
+  "consoleErrors": [],
+  "pageErrors": []
+}

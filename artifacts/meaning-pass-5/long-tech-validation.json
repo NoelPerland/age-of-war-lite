@@ -1,0 +1,26 @@
+{
+  "maxAge": {
+    "playerAge": 2,
+    "enemyAge": 2
+  },
+  "finalState": {
+    "playerGold": 96.62303333333553,
+    "enemyGold": 41.06826933333358,
+    "playerAge": 2,
+    "enemyAge": 2,
+    "playerBaseHp": 1125,
+    "enemyBaseHp": 1112,
+    "playerUnits": [
+      "scrapper",
+      "scrapper",
+      "scrapper"
+    ],
+    "enemyUnits": [
+      "scrapper"
+    ],
+    "gameEnded": false,
+    "score": 260,
+    "muted": false
+  },
+  "pageErrors": []
+}

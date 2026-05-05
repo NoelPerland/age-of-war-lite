@@ -1,0 +1,139 @@
+{
+  "beforeScrapper": {
+    "playerGold": 178.66080000000022,
+    "enemyGold": 223.22150400000004,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1125,
+    "enemyBaseHp": 1125,
+    "playerUnits": [],
+    "enemyUnits": [],
+    "gameEnded": false,
+    "score": 0,
+    "muted": false
+  },
+  "afterScrapper": {
+    "playerGold": 77.32373333333351,
+    "enemyGold": 225.5648853333334,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1125,
+    "enemyBaseHp": 1125,
+    "playerUnits": [
+      "scrapper"
+    ],
+    "enemyUnits": [],
+    "gameEnded": false,
+    "score": 0,
+    "muted": false
+  },
+  "beforeAge": {
+    "playerGold": 178.66060000000022,
+    "enemyGold": 223.22132799999997,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1125,
+    "enemyBaseHp": 1125,
+    "playerUnits": [],
+    "enemyUnits": [],
+    "gameEnded": false,
+    "score": 0,
+    "muted": false
+  },
+  "afterAge": {
+    "playerGold": 181.32353333333373,
+    "enemyGold": 225.56470933333333,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1125,
+    "enemyBaseHp": 1125,
+    "playerUnits": [],
+    "enemyUnits": [],
+    "gameEnded": false,
+    "score": 0,
+    "muted": false
+  },
+  "beforeMute": {
+    "playerGold": 182.1554666666671,
+    "enemyGold": 226.2968106666667,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1125,
+    "enemyBaseHp": 1125,
+    "playerUnits": [],
+    "enemyUnits": [],
+    "gameEnded": false,
+    "score": 0,
+    "muted": false
+  },
+  "afterMute": {
+    "state": {
+      "playerGold": 184.15240000000057,
+      "enemyGold": 228.05411200000006,
+      "playerAge": 1,
+      "enemyAge": 1,
+      "playerBaseHp": 1125,
+      "enemyBaseHp": 1125,
+      "playerUnits": [],
+      "enemyUnits": [],
+      "gameEnded": false,
+      "score": 0,
+      "muted": false
+    },
+    "save": null
+  },
+  "playerAgeVisual": {
+    "playerGold": 97.4786333333352,
+    "enemyGold": -12.178802666666034,
+    "playerAge": 1,
+    "enemyAge": 2,
+    "playerBaseHp": 1125,
+    "enemyBaseHp": 1125,
+    "playerUnits": [
+      "scrapper"
+    ],
+    "enemyUnits": [
+      "pulse-gunner",
+      "scrapper"
+    ],
+    "gameEnded": false,
+    "score": 0,
+    "muted": false
+  },
+  "enemyAgeVisual": {
+    "playerGold": 97.4786333333352,
+    "enemyGold": -12.178802666666034,
+    "playerAge": 1,
+    "enemyAge": 2,
+    "playerBaseHp": 1125,
+    "enemyBaseHp": 1125,
+    "playerUnits": [
+      "scrapper"
+    ],
+    "enemyUnits": [
+      "pulse-gunner",
+      "scrapper"
+    ],
+    "gameEnded": false,
+    "score": 0,
+    "muted": false
+  },
+  "afterRestart": {
+    "playerGold": 179.6663999999999,
+    "enemyGold": 224.10643199999987,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1125,
+    "enemyBaseHp": 1125,
+    "playerUnits": [],
+    "enemyUnits": [],
+    "gameEnded": false,
+    "score": 0,
+    "muted": false
+  },
+  "onTitle": {
+    "titleActive": true,
+    "gameActive": false
+  },
+  "pageErrors": []
+}

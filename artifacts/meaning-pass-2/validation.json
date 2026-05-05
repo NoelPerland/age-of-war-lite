@@ -1,0 +1,89 @@
+{
+  "techRun": {
+    "playerGold": 33.67680999999951,
+    "enemyGold": 73.55559280000007,
+    "playerAge": 2,
+    "enemyAge": 2,
+    "playerBaseHp": 1000,
+    "enemyBaseHp": 1000,
+    "playerUnits": [
+      "scrapper",
+      "scrapper",
+      "scrapper"
+    ],
+    "enemyUnits": [
+      "scrapper"
+    ],
+    "gameEnded": false,
+    "score": 104,
+    "muted": false
+  },
+  "techEnd": {
+    "playerGold": 31.15184000000035,
+    "enemyGold": 44.453619200000844,
+    "playerAge": 2,
+    "enemyAge": 2,
+    "playerBaseHp": 1000,
+    "enemyBaseHp": -8,
+    "playerUnits": [
+      "scrapper",
+      "scrapper",
+      "scrapper",
+      "scrapper",
+      "scrapper",
+      "scrapper"
+    ],
+    "enemyUnits": [
+      "scrapper"
+    ],
+    "gameEnded": true,
+    "score": 416,
+    "muted": false
+  },
+  "earlyMax": {
+    "playerAge": 2,
+    "enemyAge": 2
+  },
+  "age1SpamEnd": {
+    "playerGold": 101.28923999999802,
+    "enemyGold": 80.81453119999887,
+    "playerAge": 1,
+    "enemyAge": 2,
+    "playerBaseHp": 1000,
+    "enemyBaseHp": -8,
+    "playerUnits": [
+      "scrapper",
+      "scrapper",
+      "scrapper",
+      "scrapper",
+      "scrapper"
+    ],
+    "enemyUnits": [],
+    "gameEnded": true,
+    "score": 320,
+    "muted": false
+  },
+  "age1Max": {
+    "playerAge": 1,
+    "enemyAge": 2
+  },
+  "afterRestart": {
+    "playerGold": 194.39967000000019,
+    "enemyGold": 208.87170960000014,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1000,
+    "enemyBaseHp": 1000,
+    "playerUnits": [],
+    "enemyUnits": [],
+    "gameEnded": false,
+    "score": 0,
+    "muted": false
+  },
+  "persistedSave": {
+    "bestScore": 1066,
+    "bestAgeReached": 2,
+    "muted": false
+  },
+  "pageErrors": []
+}

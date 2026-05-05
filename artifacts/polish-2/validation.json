@@ -1,0 +1,99 @@
+{
+  "combatState": {
+    "playerGold": 51.13186999999996,
+    "enemyGold": 11.196045599999428,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1000,
+    "enemyBaseHp": 1000,
+    "playerUnits": [
+      "pulse-gunner",
+      "scrapper"
+    ],
+    "enemyUnits": [
+      "pulse-gunner",
+      "scrapper"
+    ],
+    "gameEnded": false,
+    "score": 0,
+    "muted": false
+  },
+  "finalRun": {
+    "state": {
+      "playerGold": 107.99423000000078,
+      "enemyGold": 39.1549223999993,
+      "playerAge": 1,
+      "enemyAge": 2,
+      "playerBaseHp": 1000,
+      "enemyBaseHp": -1,
+      "playerUnits": [
+        "scrapper",
+        "scrapper",
+        "pulse-gunner",
+        "scrapper",
+        "pulse-gunner",
+        "scrapper",
+        "pulse-gunner"
+      ],
+      "enemyUnits": [],
+      "gameEnded": true,
+      "score": 372,
+      "muted": false
+    },
+    "enemyAgeReached": 2,
+    "playerAgeReached": 1
+  },
+  "titleScene": [
+    "title"
+  ],
+  "secondRun": {
+    "playerGold": 33.990060000000156,
+    "enemyGold": 53.03125279999914,
+    "playerAge": 1,
+    "enemyAge": 2,
+    "playerBaseHp": 1000,
+    "enemyBaseHp": -14,
+    "playerUnits": [
+      "pulse-gunner",
+      "scrapper",
+      "scrapper",
+      "scrapper",
+      "scrapper",
+      "scrapper",
+      "scrapper",
+      "pulse-gunner",
+      "pulse-gunner"
+    ],
+    "enemyUnits": [],
+    "gameEnded": true,
+    "score": 432,
+    "muted": false
+  },
+  "afterRestart": {
+    "playerGold": 203.2165800000002,
+    "enemyGold": 166.63059040000002,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1000,
+    "enemyBaseHp": 1000,
+    "playerUnits": [],
+    "enemyUnits": [],
+    "gameEnded": false,
+    "score": 0,
+    "muted": false
+  },
+  "persistedSave": {
+    "bestScore": 1082,
+    "bestAgeReached": 1,
+    "muted": false
+  },
+  "consoleMessages": [
+    "debug: [vite] connecting...",
+    "debug: [vite] connected.",
+    "log: %c %c %c %c %c Phaser v3.90.0 (Canvas | Web Audio) %c https://phaser.io/v390 background: #ff0000 background: #ffff00 background: #00ff00 background: #00ffff color: #ffffff; background: #000000 background: transparent",
+    "debug: [vite] connecting...",
+    "debug: [vite] connected.",
+    "log: %c %c %c %c %c Phaser v3.90.0 (Canvas | Web Audio) %c https://phaser.io/v390 background: #ff0000 background: #ffff00 background: #00ff00 background: #00ffff color: #ffffff; background: #000000 background: transparent"
+  ],
+  "pageErrors": []
+}

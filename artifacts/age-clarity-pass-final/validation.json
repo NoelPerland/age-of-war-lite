@@ -1,0 +1,167 @@
+{
+  "interactionCheck": {
+    "scrapper": {
+      "id": "scrapper",
+      "localX": 50,
+      "localY": 34,
+      "hit": true,
+      "before": {
+        "playerGold": 178.49460000000022,
+        "enemyGold": 223.07524800000007,
+        "playerAge": 1,
+        "enemyAge": 1,
+        "playerBaseHp": 1125,
+        "enemyBaseHp": 1125,
+        "playerUnits": [],
+        "enemyUnits": [],
+        "gameEnded": false,
+        "score": 0,
+        "muted": false
+      },
+      "after": {
+        "playerGold": 74.49460000000022,
+        "enemyGold": 223.07524800000007,
+        "playerAge": 1,
+        "enemyAge": 1,
+        "playerBaseHp": 1125,
+        "enemyBaseHp": 1125,
+        "playerUnits": [
+          "scrapper"
+        ],
+        "enemyUnits": [],
+        "gameEnded": false,
+        "score": 0,
+        "muted": false
+      }
+    },
+    "ageUp": {
+      "id": "age-up",
+      "localX": 68,
+      "localY": 36,
+      "hit": true,
+      "before": {
+        "playerGold": 74.49460000000022,
+        "enemyGold": 223.07524800000007,
+        "playerAge": 1,
+        "enemyAge": 1,
+        "playerBaseHp": 1125,
+        "enemyBaseHp": 1125,
+        "playerUnits": [
+          "scrapper"
+        ],
+        "enemyUnits": [],
+        "gameEnded": false,
+        "score": 0,
+        "muted": false
+      },
+      "after": {
+        "playerGold": 74.49460000000022,
+        "enemyGold": 223.07524800000007,
+        "playerAge": 1,
+        "enemyAge": 1,
+        "playerBaseHp": 1125,
+        "enemyBaseHp": 1125,
+        "playerUnits": [
+          "scrapper"
+        ],
+        "enemyUnits": [],
+        "gameEnded": false,
+        "score": 0,
+        "muted": false
+      }
+    },
+    "mute": {
+      "id": "mute",
+      "localX": 36,
+      "localY": 10,
+      "hit": true,
+      "before": {
+        "playerGold": 74.49460000000022,
+        "enemyGold": 223.07524800000007,
+        "playerAge": 1,
+        "enemyAge": 1,
+        "playerBaseHp": 1125,
+        "enemyBaseHp": 1125,
+        "playerUnits": [
+          "scrapper"
+        ],
+        "enemyUnits": [],
+        "gameEnded": false,
+        "score": 0,
+        "muted": false
+      },
+      "after": {
+        "playerGold": 74.49460000000022,
+        "enemyGold": 223.07524800000007,
+        "playerAge": 1,
+        "enemyAge": 1,
+        "playerBaseHp": 1125,
+        "enemyBaseHp": 1125,
+        "playerUnits": [
+          "scrapper"
+        ],
+        "enemyUnits": [],
+        "gameEnded": false,
+        "score": 0,
+        "muted": true
+      }
+    },
+    "save": {
+      "bestScore": 0,
+      "bestAgeReached": 1,
+      "muted": true
+    }
+  },
+  "playerAgeState": {
+    "playerGold": 77.32406666666684,
+    "enemyGold": 225.56517866666675,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1125,
+    "enemyBaseHp": 1125,
+    "playerUnits": [
+      "scrapper"
+    ],
+    "enemyUnits": [],
+    "gameEnded": false,
+    "score": 0,
+    "muted": true
+  },
+  "enemyAgeState": {
+    "playerGold": 12.144266666668253,
+    "enemyGold": 4.246954666667156,
+    "playerAge": 1,
+    "enemyAge": 2,
+    "playerBaseHp": 1125,
+    "enemyBaseHp": 1125,
+    "playerUnits": [
+      "scrapper",
+      "scrapper"
+    ],
+    "enemyUnits": [
+      "scrapper",
+      "pulse-gunner"
+    ],
+    "gameEnded": false,
+    "score": 0,
+    "muted": true
+  },
+  "afterRestart": {
+    "playerGold": 179.1662999999998,
+    "enemyGold": 223.6663439999999,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1125,
+    "enemyBaseHp": 1125,
+    "playerUnits": [],
+    "enemyUnits": [],
+    "gameEnded": false,
+    "score": 0,
+    "muted": true
+  },
+  "onTitle": {
+    "titleActive": true,
+    "gameActive": false
+  },
+  "pageErrors": []
+}

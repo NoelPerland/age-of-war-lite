@@ -1,0 +1,50 @@
+{
+  "techMax": {
+    "playerAge": 2,
+    "enemyAge": 2
+  },
+  "techState": {
+    "playerGold": 18.795366666669494,
+    "enemyGold": 105.05992266666799,
+    "playerAge": 2,
+    "enemyAge": 2,
+    "playerBaseHp": 1125,
+    "enemyBaseHp": 1125,
+    "playerUnits": [
+      "scrapper",
+      "scrapper",
+      "scrapper"
+    ],
+    "enemyUnits": [
+      "scrapper"
+    ],
+    "gameEnded": false,
+    "score": 104,
+    "muted": false
+  },
+  "age1Max": {
+    "playerAge": 2,
+    "enemyAge": 2
+  },
+  "age1SpamState": {
+    "playerGold": 104.44776666666826,
+    "enemyGold": 3.794034666666645,
+    "playerAge": 2,
+    "enemyAge": 2,
+    "playerBaseHp": 1125,
+    "enemyBaseHp": 1047,
+    "playerUnits": [
+      "scrapper",
+      "scrapper",
+      "scrapper"
+    ],
+    "enemyUnits": [
+      "scrapper"
+    ],
+    "gameEnded": false,
+    "score": 312,
+    "muted": false
+  },
+  "persistedSave": null,
+  "pageErrors": []
+}

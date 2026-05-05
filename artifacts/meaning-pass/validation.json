@@ -1,0 +1,113 @@
+{
+  "earlyClash": {
+    "playerGold": 10.16420000000064,
+    "enemyGold": 12.624496000000622,
+    "playerAge": 2,
+    "enemyAge": 2,
+    "playerBaseHp": 1000,
+    "enemyBaseHp": 1000,
+    "playerUnits": [
+      "scrapper",
+      "scrapper"
+    ],
+    "enemyUnits": [
+      "scrapper",
+      "scrapper"
+    ],
+    "gameEnded": false,
+    "score": 0,
+    "muted": false
+  },
+  "techRun": {
+    "state": {
+      "playerGold": 65.14132000000028,
+      "enemyGold": 92.324361600001,
+      "playerAge": 2,
+      "enemyAge": 3,
+      "playerBaseHp": 1000,
+      "enemyBaseHp": -7,
+      "playerUnits": [
+        "scrapper",
+        "scrapper",
+        "scrapper",
+        "scrapper",
+        "scrapper",
+        "scrapper"
+      ],
+      "enemyUnits": [
+        "scrapper"
+      ],
+      "gameEnded": true,
+      "score": 156,
+      "muted": false
+    },
+    "maxPlayerAge": 2,
+    "maxEnemyAge": 3,
+    "elapsedMs": 47269.10000002384
+  },
+  "titleReturn": [
+    "title"
+  ],
+  "age1SpamRun": {
+    "state": {
+      "playerGold": 88.1457600000003,
+      "enemyGold": 56.52826880000079,
+      "playerAge": 1,
+      "enemyAge": 2,
+      "playerBaseHp": 1000,
+      "enemyBaseHp": -4,
+      "playerUnits": [
+        "pulse-gunner",
+        "scrapper",
+        "scrapper",
+        "scrapper",
+        "scrapper",
+        "scrapper"
+      ],
+      "enemyUnits": [
+        "scrapper"
+      ],
+      "gameEnded": true,
+      "score": 216,
+      "muted": false
+    },
+    "maxEnemyAge": 2,
+    "elapsedMs": 45222.39999997616
+  },
+  "afterRestart": {
+    "playerGold": 217.19967999999992,
+    "enemyGold": 185.73571839999985,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1000,
+    "enemyBaseHp": 1000,
+    "playerUnits": [],
+    "enemyUnits": [],
+    "gameEnded": false,
+    "score": 0,
+    "muted": false
+  },
+  "persistedSave": {
+    "bestScore": 866,
+    "bestAgeReached": 1,
+    "muted": false
+  },
+  "consoleMessages": [
+    "debug: [vite] connecting...",
+    "log: %c %c %c %c %c Phaser v3.90.0 (Canvas | Web Audio) %c https://phaser.io/v390 background: #ff0000 background: #ffff00 background: #00ff00 background: #00ffff color: #ffffff; background: #000000 background: transparent",
+    "debug: [vite] connected.",
+    "debug: [vite] connecting...",
+    "debug: [vite] connected.",
+    "log: %c %c %c %c %c Phaser v3.90.0 (Canvas | Web Audio) %c https://phaser.io/v390 background: #ff0000 background: #ffff00 background: #00ff00 background: #00ffff color: #ffffff; background: #000000 background: transparent",
+    "debug: [vite] connecting...",
+    "debug: [vite] connected.",
+    "log: %c %c %c %c %c Phaser v3.90.0 (Canvas | Web Audio) %c https://phaser.io/v390 background: #ff0000 background: #ffff00 background: #00ff00 background: #00ffff color: #ffffff; background: #000000 background: transparent",
+    "debug: [vite] connecting...",
+    "log: %c %c %c %c %c Phaser v3.90.0 (Canvas | Web Audio) %c https://phaser.io/v390 background: #ff0000 background: #ffff00 background: #00ff00 background: #00ffff color: #ffffff; background: #000000 background: transparent",
+    "debug: [vite] connected.",
+    "debug: [vite] connecting...",
+    "debug: [vite] connected.",
+    "log: %c %c %c %c %c Phaser v3.90.0 (Canvas | Web Audio) %c https://phaser.io/v390 background: #ff0000 background: #ffff00 background: #00ff00 background: #00ffff color: #ffffff; background: #000000 background: transparent"
+  ],
+  "pageErrors": []
+}

@@ -1,0 +1,125 @@
+{
+  "title": {
+    "initialSave": {},
+    "mutedSave": {
+      "bestScore": 0,
+      "bestAgeReached": 1,
+      "muted": true,
+      "difficulty": "normal"
+    },
+    "unmutedSave": {
+      "bestScore": 0,
+      "bestAgeReached": 1,
+      "muted": false,
+      "difficulty": "normal"
+    },
+    "hardSave": {
+      "bestScore": 0,
+      "bestAgeReached": 1,
+      "muted": false,
+      "difficulty": "hard"
+    }
+  },
+  "rawClicks": {
+    "startWorked": true,
+    "scrapperCenterWorked": true,
+    "scrapperCornerWorked": false,
+    "ageUpCenterWorked": true,
+    "ageUpCornerWorked": false,
+    "muteCenterWorked": true,
+    "muteCornerWorked": false
+  },
+  "easyRun": {
+    "finalState": {
+      "difficulty": "easy",
+      "playerGold": 120.4216599999973,
+      "enemyGold": 100.64319715200313,
+      "playerAge": 2,
+      "enemyAge": 3,
+      "playerBaseHp": 1280,
+      "enemyBaseHp": -10,
+      "playerUnits": [
+        "pulse-gunner",
+        "pulse-gunner"
+      ],
+      "enemyUnits": [],
+      "gameEnded": true,
+      "overlayVisible": true,
+      "score": 416,
+      "muted": true
+    },
+    "maxPlayerAge": 2,
+    "maxEnemyAge": 3
+  },
+  "restartCheck": {
+    "state": {
+      "difficulty": "normal",
+      "playerGold": 193.93282000000022,
+      "enemyGold": 143.4897563239999,
+      "playerAge": 1,
+      "enemyAge": 1,
+      "playerBaseHp": 1280,
+      "enemyBaseHp": 1280,
+      "playerUnits": [],
+      "enemyUnits": [
+        "scrapper"
+      ],
+      "gameEnded": false,
+      "overlayVisible": false,
+      "score": 0,
+      "muted": true
+    },
+    "resetWorked": true
+  },
+  "hardRun": {
+    "finalState": {
+      "difficulty": "hard",
+      "playerGold": 79.0747199999988,
+      "enemyGold": 100.27646995199869,
+      "playerAge": 3,
+      "enemyAge": 3,
+      "playerBaseHp": 1235,
+      "enemyBaseHp": 650,
+      "playerUnits": [
+        "pulse-gunner",
+        "pulse-gunner",
+        "arc-caster"
+      ],
+      "enemyUnits": [
+        "scrapper"
+      ],
+      "gameEnded": false,
+      "overlayVisible": false,
+      "score": 320,
+      "muted": true
+    },
+    "maxPlayerAge": 3,
+    "maxEnemyAge": 3
+  },
+  "difficultyComparison": {
+    "easyDifficulty": "easy",
+    "hardDifficulty": "hard",
+    "easyPlayerBaseHp": 1280,
+    "hardPlayerBaseHp": 1235,
+    "easyEnemyBaseHp": -10,
+    "hardEnemyBaseHp": 650,
+    "easyEnemyAge": 3,
+    "hardEnemyAge": 3,
+    "easyPlayerAge": 2,
+    "hardPlayerAge": 3
+  },
+  "titleReturnSave": {
+    "bestScore": 1066,
+    "bestAgeReached": 2,
+    "muted": true,
+    "difficulty": "easy"
+  },
+  "finalSave": {
+    "bestScore": 1074,
+    "bestAgeReached": 2,
+    "muted": true,
+    "difficulty": "hard"
+  },
+  "consoleErrors": [],
+  "pageErrors": []
+}

@@ -1,0 +1,24 @@
+{
+  "maxAge": {
+    "playerAge": 2,
+    "enemyAge": 2
+  },
+  "finalState": {
+    "playerGold": 204.29163333332858,
+    "enemyGold": 62.05663733333481,
+    "playerAge": 2,
+    "enemyAge": 2,
+    "playerBaseHp": 1125,
+    "enemyBaseHp": -37,
+    "playerUnits": [
+      "bulwark",
+      "arc-caster",
+      "arc-caster"
+    ],
+    "enemyUnits": [],
+    "gameEnded": true,
+    "score": 260,
+    "muted": false
+  },
+  "pageErrors": []
+}

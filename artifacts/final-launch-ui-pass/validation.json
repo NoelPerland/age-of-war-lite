@@ -1,0 +1,101 @@
+{
+  "title": {
+    "beforeSave": {},
+    "hardSave": {}
+  },
+  "rawClicks": {
+    "startWorked": true,
+    "scrapperWorked": true,
+    "ageUpWorked": false,
+    "muteWorked": false
+  },
+  "easyRun": {
+    "finalState": {
+      "difficulty": "easy",
+      "playerGold": 32.865919999997615,
+      "enemyGold": 74.05708902400293,
+      "playerAge": 3,
+      "enemyAge": 3,
+      "playerBaseHp": 1280,
+      "enemyBaseHp": -46,
+      "playerUnits": [
+        "arc-caster",
+        "raider",
+        "arc-caster"
+      ],
+      "enemyUnits": [],
+      "gameEnded": true,
+      "overlayVisible": true,
+      "score": 268,
+      "muted": false
+    },
+    "maxPlayerAge": 3,
+    "maxEnemyAge": 3
+  },
+  "restartCheck": {
+    "state": {
+      "difficulty": "normal",
+      "playerGold": 193.74945000000025,
+      "enemyGold": 143.31221748999985,
+      "playerAge": 1,
+      "enemyAge": 1,
+      "playerBaseHp": 1280,
+      "enemyBaseHp": 1280,
+      "playerUnits": [],
+      "enemyUnits": [
+        "scrapper"
+      ],
+      "gameEnded": false,
+      "overlayVisible": false,
+      "score": 0,
+      "muted": false
+    },
+    "resetWorked": true
+  },
+  "hardRun": {
+    "finalState": {
+      "difficulty": "normal",
+      "playerGold": 148.97130999999942,
+      "enemyGold": 73.47202234200168,
+      "playerAge": 2,
+      "enemyAge": 3,
+      "playerBaseHp": 1280,
+      "enemyBaseHp": 485,
+      "playerUnits": [
+        "pulse-gunner",
+        "pulse-gunner",
+        "pulse-gunner",
+        "pulse-gunner"
+      ],
+      "enemyUnits": [],
+      "gameEnded": false,
+      "overlayVisible": false,
+      "score": 320,
+      "muted": false
+    },
+    "maxPlayerAge": 2,
+    "maxEnemyAge": 3
+  },
+  "difficultyComparison": {
+    "easyDifficulty": "easy",
+    "hardDifficulty": "normal",
+    "easyPlayerBaseHp": 1280,
+    "hardPlayerBaseHp": 1280,
+    "easyEnemyAge": 3,
+    "hardEnemyAge": 3
+  },
+  "titleReturnSave": {
+    "bestScore": 918,
+    "bestAgeReached": 3,
+    "muted": false,
+    "difficulty": "easy"
+  },
+  "finalSave": {
+    "bestScore": 1014,
+    "bestAgeReached": 3,
+    "muted": false,
+    "difficulty": "normal"
+  },
+  "consoleErrors": [],
+  "pageErrors": []
+}

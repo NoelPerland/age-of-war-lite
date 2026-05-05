@@ -1,0 +1,279 @@
+{
+  "rawStartWorked": true,
+  "cardChecks": {
+    "scrapper": {
+      "center": true,
+      "topLeft": true,
+      "topRight": true,
+      "bottomLeft": true,
+      "bottomRight": true
+    },
+    "age-up": {
+      "center": true,
+      "topLeft": true,
+      "topRight": true,
+      "bottomLeft": true,
+      "bottomRight": true
+    },
+    "mute": {
+      "center": true,
+      "topLeft": true,
+      "topRight": true,
+      "bottomLeft": true,
+      "bottomRight": true
+    }
+  },
+  "scrapperCheck": {
+    "before": {
+      "playerGold": 191.16675999999993,
+      "enemyGold": 238.49675439999982,
+      "playerAge": 1,
+      "enemyAge": 1,
+      "playerBaseHp": 1200,
+      "enemyBaseHp": 1200,
+      "playerUnits": [],
+      "enemyUnits": [],
+      "gameEnded": false,
+      "score": 0,
+      "muted": false
+    },
+    "after": {
+      "playerGold": 83.16675999999993,
+      "enemyGold": 238.49675439999982,
+      "playerAge": 1,
+      "enemyAge": 1,
+      "playerBaseHp": 1200,
+      "enemyBaseHp": 1200,
+      "playerUnits": [
+        "scrapper"
+      ],
+      "enemyUnits": [],
+      "gameEnded": false,
+      "score": 0,
+      "muted": false
+    }
+  },
+  "ageUpCheck": {
+    "before": {
+      "playerGold": 183.8442066666666,
+      "enemyGold": 231.61355426666663,
+      "playerAge": 1,
+      "enemyAge": 1,
+      "playerBaseHp": 1200,
+      "enemyBaseHp": 1200,
+      "playerUnits": [],
+      "enemyUnits": [],
+      "gameEnded": false,
+      "score": 0,
+      "muted": false
+    },
+    "after": {
+      "playerGold": 38.844206666666594,
+      "enemyGold": 231.61355426666663,
+      "playerAge": 2,
+      "enemyAge": 1,
+      "playerBaseHp": 1200,
+      "enemyBaseHp": 1200,
+      "playerUnits": [],
+      "enemyUnits": [],
+      "gameEnded": false,
+      "score": 0,
+      "muted": false
+    }
+  },
+  "muteCheck": {
+    "before": {
+      "playerGold": 39.027319999999925,
+      "enemyGold": 231.78568079999997,
+      "playerAge": 2,
+      "enemyAge": 1,
+      "playerBaseHp": 1200,
+      "enemyBaseHp": 1200,
+      "playerUnits": [],
+      "enemyUnits": [],
+      "gameEnded": false,
+      "score": 0,
+      "muted": false
+    },
+    "after": {
+      "playerGold": 39.027319999999925,
+      "enemyGold": 231.78568079999997,
+      "playerAge": 2,
+      "enemyAge": 1,
+      "playerBaseHp": 1200,
+      "enemyBaseHp": 1200,
+      "playerUnits": [],
+      "enemyUnits": [],
+      "gameEnded": false,
+      "score": 0,
+      "muted": true
+    },
+    "save": {
+      "bestScore": 0,
+      "bestAgeReached": 1,
+      "muted": true
+    }
+  },
+  "practice": {
+    "maxPlayerAge": 3,
+    "maxEnemyAge": 3
+  },
+  "finalState": {
+    "playerGold": 13.442763333331015,
+    "enemyGold": 66.91619753333747,
+    "playerAge": 3,
+    "enemyAge": 3,
+    "playerBaseHp": 960,
+    "enemyBaseHp": 0,
+    "playerUnits": [
+      "bulwark",
+      "pulse-gunner",
+      "pulse-gunner",
+      "pulse-gunner"
+    ],
+    "enemyUnits": [],
+    "gameEnded": true,
+    "score": 320,
+    "muted": true
+  },
+  "overlayButtons": {
+    "count": 7,
+    "interactiveContainers": 2
+  },
+  "afterRestartKey": {
+    "playerGold": 185.6830400000001,
+    "enemyGold": 233.34205759999992,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1200,
+    "enemyBaseHp": 1200,
+    "playerUnits": [],
+    "enemyUnits": [],
+    "gameEnded": false,
+    "score": 0,
+    "muted": true
+  },
+  "postRestartSpawn": {
+    "playerGold": 80.61619000000006,
+    "enemyGold": 236.0992185999999,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1200,
+    "enemyBaseHp": 1200,
+    "playerUnits": [
+      "scrapper"
+    ],
+    "enemyUnits": [],
+    "gameEnded": false,
+    "score": 0,
+    "muted": true
+  },
+  "onTitle": {
+    "titleActive": true,
+    "gameActive": false,
+    "save": {
+      "bestScore": 970,
+      "bestAgeReached": 3,
+      "muted": true
+    }
+  },
+  "pageErrors": [],
+  "rawCanvasHudClicks": {
+    "scrapper": {
+      "before": {
+        "playerGold": 185.95026666666664,
+        "enemyGold": 233.5932506666666,
+        "playerAge": 1,
+        "enemyAge": 1,
+        "playerBaseHp": 1200,
+        "enemyBaseHp": 1200,
+        "playerUnits": [],
+        "enemyUnits": [],
+        "gameEnded": false,
+        "score": 0,
+        "muted": false
+      },
+      "after": {
+        "playerGold": 80.3287966666667,
+        "enemyGold": 235.82906886666655,
+        "playerAge": 1,
+        "enemyAge": 1,
+        "playerBaseHp": 1200,
+        "enemyBaseHp": 1200,
+        "playerUnits": [
+          "scrapper"
+        ],
+        "enemyUnits": [],
+        "gameEnded": false,
+        "score": 0,
+        "muted": false
+      }
+    },
+    "ageUp": {
+      "before": {
+        "playerGold": 220.5484966666667,
+        "enemyGold": 236.3446557333332,
+        "playerAge": 1,
+        "enemyAge": 1,
+        "playerBaseHp": 1200,
+        "enemyBaseHp": 1200,
+        "playerUnits": [
+          "scrapper"
+        ],
+        "enemyUnits": [],
+        "gameEnded": false,
+        "score": 0,
+        "muted": false
+      },
+      "after": {
+        "playerGold": 78.10922333333342,
+        "enemyGold": 238.75173879999988,
+        "playerAge": 2,
+        "enemyAge": 1,
+        "playerBaseHp": 1200,
+        "enemyBaseHp": 1200,
+        "playerUnits": [
+          "scrapper"
+        ],
+        "enemyUnits": [],
+        "gameEnded": false,
+        "score": 0,
+        "muted": false
+      }
+    },
+    "mute": {
+      "before": {
+        "playerGold": 78.10922333333342,
+        "enemyGold": 238.75173879999988,
+        "playerAge": 2,
+        "enemyAge": 1,
+        "playerBaseHp": 1200,
+        "enemyBaseHp": 1200,
+        "playerUnits": [
+          "scrapper"
+        ],
+        "enemyUnits": [],
+        "gameEnded": false,
+        "score": 0,
+        "muted": false
+      },
+      "after": {
+        "playerGold": 79.93977000000012,
+        "enemyGold": 3.47245266666656,
+        "playerAge": 2,
+        "enemyAge": 2,
+        "playerBaseHp": 1200,
+        "enemyBaseHp": 1200,
+        "playerUnits": [
+          "scrapper"
+        ],
+        "enemyUnits": [
+          "pulse-gunner"
+        ],
+        "gameEnded": false,
+        "score": 0,
+        "muted": true
+      }
+    }
+  }
+}

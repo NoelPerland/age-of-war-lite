@@ -1,0 +1,146 @@
+{
+  "initial": {
+    "playerGold": 205.97947999999997,
+    "enemyGold": 158.74235279999982,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1000,
+    "enemyBaseHp": 1000,
+    "playerUnits": [],
+    "enemyUnits": [],
+    "gameEnded": false,
+    "score": 0,
+    "muted": false
+  },
+  "afterSpawn": {
+    "playerGold": 139.57915999999986,
+    "enemyGold": 61.13807759999976,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1000,
+    "enemyBaseHp": 1000,
+    "playerUnits": [
+      "scrapper"
+    ],
+    "enemyUnits": [
+      "pulse-gunner"
+    ],
+    "gameEnded": false,
+    "score": 0,
+    "muted": false
+  },
+  "afterAgeUp": {
+    "playerGold": 4.9759999999991384,
+    "enemyGold": 50.97936000000004,
+    "playerAge": 2,
+    "enemyAge": 1,
+    "playerBaseHp": 1000,
+    "enemyBaseHp": 1000,
+    "playerUnits": [
+      "scrapper"
+    ],
+    "enemyUnits": [
+      "pulse-gunner",
+      "scrapper"
+    ],
+    "gameEnded": false,
+    "score": 0,
+    "muted": false
+  },
+  "mutedOn": true,
+  "mutedOff": false,
+  "firstRun": {
+    "state": {
+      "playerGold": 4.724039999999367,
+      "enemyGold": 63.362674400000834,
+      "playerAge": 2,
+      "enemyAge": 3,
+      "playerBaseHp": 982,
+      "enemyBaseHp": -14,
+      "playerUnits": [
+        "scrapper",
+        "scrapper",
+        "scrapper",
+        "scrapper",
+        "scrapper",
+        "scrapper",
+        "scrapper",
+        "scrapper"
+      ],
+      "enemyUnits": [],
+      "gameEnded": true,
+      "score": 722,
+      "muted": false
+    },
+    "enemyAgeReached": 3,
+    "playerAgeReached": 2,
+    "elapsedMs": 109163.5
+  },
+  "activeAfterTitleReturn": [
+    "title"
+  ],
+  "secondRun": {
+    "state": {
+      "playerGold": 68.17896000000013,
+      "enemyGold": 67.37390560000003,
+      "playerAge": 1,
+      "enemyAge": 2,
+      "playerBaseHp": 1000,
+      "enemyBaseHp": -4,
+      "playerUnits": [
+        "scrapper",
+        "scrapper",
+        "scrapper",
+        "scrapper",
+        "scrapper",
+        "scrapper",
+        "scrapper",
+        "scrapper"
+      ],
+      "enemyUnits": [
+        "scrapper"
+      ],
+      "gameEnded": true,
+      "score": 252,
+      "muted": false
+    },
+    "enemyAgeReached": 2,
+    "playerAgeReached": 1,
+    "elapsedMs": 42783.700000047684
+  },
+  "afterRestart": {
+    "playerGold": 204.5993199999997,
+    "enemyGold": 157.55541519999994,
+    "playerAge": 1,
+    "enemyAge": 1,
+    "playerBaseHp": 1000,
+    "enemyBaseHp": 1000,
+    "playerUnits": [],
+    "enemyUnits": [],
+    "gameEnded": false,
+    "score": 0,
+    "muted": false
+  },
+  "persistedSave": {
+    "bestScore": 1372,
+    "bestAgeReached": 2,
+    "muted": false
+  },
+  "titleAfterReload": [
+    "title"
+  ],
+  "consoleMessages": [
+    "debug: [vite] connecting...",
+    "debug: [vite] connected.",
+    "debug: [vite] connecting...",
+    "debug: [vite] connected.",
+    "log: %c %c %c %c %c Phaser v3.90.0 (Canvas | Web Audio) %c https://phaser.io/v390 background: #ff0000 background: #ffff00 background: #00ff00 background: #00ffff color: #ffffff; background: #000000 background: transparent",
+    "debug: [vite] connecting...",
+    "debug: [vite] connected.",
+    "log: %c %c %c %c %c Phaser v3.90.0 (Canvas | Web Audio) %c https://phaser.io/v390 background: #ff0000 background: #ffff00 background: #00ff00 background: #00ffff color: #ffffff; background: #000000 background: transparent",
+    "debug: [vite] connecting...",
+    "log: %c %c %c %c %c Phaser v3.90.0 (Canvas | Web Audio) %c https://phaser.io/v390 background: #ff0000 background: #ffff00 background: #00ff00 background: #00ffff color: #ffffff; background: #000000 background: transparent",
+    "debug: [vite] connected."
+  ],
+  "pageErrors": []
+}
