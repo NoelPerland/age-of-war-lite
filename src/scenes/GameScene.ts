@@ -1138,17 +1138,20 @@ export class GameScene extends Phaser.Scene {
     this.state.audio.play(result === 'victory' ? 'victory' : 'defeat')
 
     const overlay = this.add.container(GAME_WIDTH / 2, GAME_HEIGHT / 2)
-    const shade = this.add.rectangle(0, 0, GAME_WIDTH, GAME_HEIGHT, 0x02060d, 0.42)
-    const backdrop = this.add.rectangle(0, 0, 548, 318, 0x07121f, 0.94).setStrokeStyle(
-      2,
-      result === 'victory' ? 0x64f0ff : 0xff8d80,
-      0.55,
+    const shade = this.add.rectangle(0, 0, GAME_WIDTH, GAME_HEIGHT, 0x050913, 0.58)
+    const halo = this.add.ellipse(0, -80, 520, 120, result === 'victory' ? 0x69d8d2 : 0xe19b77, 0.14)
+    const backdrop = this.add.rectangle(0, 0, 590, 340, 0xf3e7cc, 0.98).setStrokeStyle(
+      4,
+      result === 'victory' ? 0x2d9aaa : 0xb86e54,
+      0.78,
     )
+    const inner = this.add.rectangle(0, 0, 544, 294, 0xfff7df, 0.18).setStrokeStyle(2, 0x725533, 0.38)
+    const topRule = this.add.rectangle(0, -134, 346, 6, result === 'victory' ? 0x2d9aaa : 0xb86e54, 0.5)
     const title = this.add
       .text(0, -104, result === 'victory' ? 'VICTORY' : 'DEFEAT', {
         fontFamily: 'Trebuchet MS',
-        fontSize: '46px',
-        color: result === 'victory' ? '#8df9ff' : '#ffc0b1',
+        fontSize: '52px',
+        color: result === 'victory' ? '#186d78' : '#7d3528',
         fontStyle: 'bold',
       })
       .setOrigin(0.5)
@@ -1156,32 +1159,34 @@ export class GameScene extends Phaser.Scene {
       .text(0, -66, `${this.difficulty.label.toUpperCase()} FRONT`, {
         fontFamily: 'Trebuchet MS',
         fontSize: '15px',
-        color: '#9db8c1',
+        color: '#725533',
         fontStyle: 'bold',
         letterSpacing: 1.1,
       })
       .setOrigin(0.5)
     const body = this.add
-      .text(0, -2, `Score ${totalScore}\nReached ${AGE_NAMES[ageReached - 1]}\nBest ${nextSave.bestScore}`, {
+      .text(0, -4, `Score ${totalScore}\nReached ${AGE_NAMES[ageReached - 1]}\nBest ${nextSave.bestScore}`, {
         fontFamily: 'Trebuchet MS',
-        fontSize: '21px',
-        color: '#edfaff',
+        fontSize: '22px',
+        color: '#2d2419',
         align: 'center',
-        lineSpacing: 10,
+        lineSpacing: 12,
       })
       .setOrigin(0.5)
-    const restartButton = this.makeOverlayButton(-98, 92, 176, 54, 'Restart', '#8ef9ff')
+    const restartButton = this.makeOverlayButton(-108, 98, 190, 58, 'Restart', '#2d9aaa')
     restartButton.on('pointerup', () => this.scene.restart())
-    const titleButton = this.makeOverlayButton(98, 92, 176, 54, 'Title', '#ffbaa8')
+    const titleButton = this.makeOverlayButton(108, 98, 190, 58, 'Title', '#b86e54')
     titleButton.on('pointerup', () => this.scene.start('title'))
     const footer = this.add
       .text(0, 140, 'R restart • T title', {
         fontFamily: 'Trebuchet MS',
         fontSize: '14px',
-        color: '#8fa7b0',
+        color: '#725533',
       })
       .setOrigin(0.5)
-    overlay.add([shade, backdrop, title, tag, body, restartButton, titleButton, footer])
+    footer.setPosition(0, 150)
+    footer.setText('R restart / T title')
+    overlay.add([shade, halo, backdrop, inner, topRule, title, tag, body, restartButton, titleButton, footer])
     overlay.setDepth(30)
     this.resultOverlay = overlay
   }
@@ -1456,11 +1461,12 @@ export class GameScene extends Phaser.Scene {
   private makeOverlayButton(x: number, y: number, width: number, height: number, label: string, colorText: string) {
     const container = this.add.container(x, y)
     const fill = Phaser.Display.Color.HexStringToColor(colorText).color
-    const shadow = this.add.rectangle(0, 5, width, height, 0x000000, 0.24)
+    const shadow = this.add.rectangle(0, 6, width, height, 0x2b2014, 0.22)
     const hitArea = this.add.zone(0, 0, width + 10, height + 10).setInteractive({ cursor: 'pointer' })
     const bg = this.add
-      .rectangle(0, 0, width, height, 0x112336, 0.96)
-      .setStrokeStyle(2, fill, 0.5)
+      .rectangle(0, 0, width, height, 0xf0dfbd, 0.98)
+      .setStrokeStyle(3, fill, 0.78)
+    const accent = this.add.rectangle(0, -height / 2 + 7, width - 22, 4, fill, 0.45)
     const text = this.add
       .text(0, 0, label, {
         fontFamily: 'Trebuchet MS',
@@ -1469,15 +1475,15 @@ export class GameScene extends Phaser.Scene {
         fontStyle: 'bold',
       })
       .setOrigin(0.5)
-    container.add([shadow, bg, hitArea, text])
+    container.add([shadow, bg, accent, hitArea, text])
     const reset = (hovered: boolean) => {
-      bg.setFillStyle(0x112336, hovered ? 1 : 0.96)
+      bg.setFillStyle(hovered ? 0xffedc8 : 0xf0dfbd, 0.98)
       container.setScale(1)
     }
     hitArea.on('pointerover', () => reset(true))
     hitArea.on('pointerout', () => reset(false))
     hitArea.on('pointerdown', () => {
-      bg.setFillStyle(0x17334f, 1)
+      bg.setFillStyle(0xe4c895, 1)
       container.setScale(0.985)
     })
     hitArea.on('pointerup', () => {
