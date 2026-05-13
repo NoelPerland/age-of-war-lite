@@ -20,10 +20,10 @@ export class TitleScene extends Phaser.Scene {
     let selectedDifficulty = this.state.save.difficulty
 
     this.add.rectangle(width / 2, height / 2, width, height, 0x07111f, 1)
-    this.add.image(width / 2, height / 2, 'chrono-screen-home').setDisplaySize(width, height)
+    this.add.image(width / 2, height / 2, 'chrono-title-16x9').setDisplaySize(width, height)
 
     const selectedOutline = this.add
-      .rectangle(0, 0, 164, 42, 0x000000, 0)
+      .rectangle(0, 0, 224, 58, 0x000000, 0)
       .setStrokeStyle(4, 0xffd45a, 0.95)
       .setDepth(4)
 
@@ -38,22 +38,22 @@ export class TitleScene extends Phaser.Scene {
       selectedDifficulty = difficulty
       this.state.save = mergeSave({ difficulty })
       this.state.audio.play('click')
-      selectedOutline.setPosition(x, 590).setSize(width, 42)
+      selectedOutline.setPosition(x, 574).setSize(width, 58)
     }
 
     const difficultyPositions: Record<DifficultyId, { x: number; width: number }> = {
-      easy: { x: 244, width: 148 },
-      normal: { x: 513, width: 172 },
-      hard: { x: 781, width: 148 },
+      easy: { x: 380, width: 220 },
+      normal: { x: 640, width: 224 },
+      hard: { x: 900, width: 220 },
     }
     const active = difficultyPositions[selectedDifficulty] ?? difficultyPositions.normal
-    selectedOutline.setPosition(active.x, 590).setSize(active.width, 42)
+    selectedOutline.setPosition(active.x, 574).setSize(active.width, 58)
 
-    this.makeHitZone(width / 2, 500, 330, 70, startBattle)
-    this.makeHitZone(244, 590, 148, 42, () => setDifficulty('easy', 244, 148))
-    this.makeHitZone(513, 590, 172, 42, () => setDifficulty('normal', 513, 172))
-    this.makeHitZone(781, 590, 148, 42, () => setDifficulty('hard', 781, 148))
-    this.makeHitZone(930, 500, 120, 54, () => {
+    this.makeHitZone(width / 2, 486, 440, 86, startBattle)
+    this.makeHitZone(380, 574, 220, 58, () => setDifficulty('easy', 380, 220))
+    this.makeHitZone(640, 574, 224, 58, () => setDifficulty('normal', 640, 224))
+    this.makeHitZone(900, 574, 220, 58, () => setDifficulty('hard', 900, 220))
+    this.makeHitZone(1086, 660, 146, 48, () => {
       const nextMuted = !this.state.save.muted
       this.state.save = mergeSave({ muted: nextMuted })
       this.state.audio.setMuted(nextMuted)

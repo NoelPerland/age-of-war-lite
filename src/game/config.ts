@@ -43,7 +43,7 @@ export interface DifficultyConfig {
 
 export const GAME_WIDTH = 1280
 export const GAME_HEIGHT = 720
-export const LANE_Y = 462
+export const LANE_Y = 452
 export const PLAYER_BASE_X = 132
 export const ENEMY_BASE_X = 1148
 export const BASE_BODY_WIDTH = 132
@@ -81,7 +81,7 @@ export const UNIT_RENDER_SCALE = 0.82
 export const UNIT_TEXTURE_WIDTH = 128
 export const UNIT_TEXTURE_HEIGHT = 128
 
-export const AGE_NAMES = ['Neon Dawn', 'Circuit Forge', 'Nova Dominion']
+export const AGE_NAMES = ['Stone Dawn', 'Iron Forge', 'Chrono Citadel']
 
 export const DIFFICULTY_OPTIONS: DifficultyConfig[] = [
   {
@@ -109,7 +109,7 @@ export const DIFFICULTY_OPTIONS: DifficultyConfig[] = [
   {
     id: 'hard',
     label: 'Hard',
-    note: 'Aggressive tech race',
+    note: 'Aggressive enemy',
     enemyGoldFactor: 1.14,
     enemyStartingGold: 272,
     thinkIntervalFactor: 0.82,
@@ -196,7 +196,7 @@ export const UNIT_DEFS: UnitDefinition[] = [
   },
   {
     id: 'raider',
-    name: 'Nova Raider',
+    name: 'Chrono Raider',
     age: 3,
     role: 'Fast finisher',
     shortRole: 'RUSH',

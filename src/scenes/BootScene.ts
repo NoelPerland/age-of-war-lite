@@ -240,6 +240,9 @@ export class BootScene extends Phaser.Scene {
     this.load.image('chrono-screen-design', '/assets/ui/chrono-siege-screen-design.png')
     this.load.image('chrono-screen-home', '/assets/ui/chrono-screen-home.png')
     this.load.image('chrono-screen-end', '/assets/ui/chrono-screen-end.png')
+    this.load.image('chrono-title-16x9', '/assets/ui/chrono-title-16x9.png')
+    this.load.image('chrono-victory-16x9', '/assets/ui/chrono-victory-16x9.png')
+    this.load.image('chrono-battle-16x9', '/assets/ui/chrono-battle-16x9.png')
   }
 
   create() {

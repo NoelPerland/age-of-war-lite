@@ -222,6 +222,8 @@ export class GameScene extends Phaser.Scene {
   }
 
   private buildScene() {
+    this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, 'chrono-battle-16x9').setDisplaySize(GAME_WIDTH, GAME_HEIGHT).setDepth(0)
+
     const sky = this.add.graphics()
     sky.fillGradientStyle(0x111a2c, 0x1b2a3f, 0x050912, 0x050912, 1)
     sky.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT)
@@ -240,6 +242,7 @@ export class GameScene extends Phaser.Scene {
     for (let index = 0; index < 12; index += 1) {
       sky.fillCircle(88 + index * 102, 82 + (index % 4) * 14, 2 + (index % 2))
     }
+    sky.setVisible(false)
 
     const battlefield = this.add.graphics()
     battlefield.fillStyle(0x091321, 0.97)
@@ -265,7 +268,8 @@ export class GameScene extends Phaser.Scene {
     battlefield.fillRect(44, LANE_Y + 24, 196, 28)
     battlefield.fillStyle(0xc18f7a, 0.06)
     battlefield.fillRect(GAME_WIDTH - 240, LANE_Y + 24, 196, 28)
-    this.clashGlow = this.add.ellipse(GAME_WIDTH / 2, LANE_Y + 2, 220, 136, 0xffc188, 0.05).setDepth(2.5)
+    battlefield.setVisible(false)
+    this.clashGlow = this.add.ellipse(GAME_WIDTH / 2, LANE_Y + 2, 220, 136, 0xffc188, 0.04).setDepth(2.5)
 
     this.playerBase = this.createBase('player', PLAYER_BASE_X)
     this.enemyBase = this.createBase('enemy', ENEMY_BASE_X)
@@ -356,6 +360,12 @@ export class GameScene extends Phaser.Scene {
       parts.push(art)
     }
 
+    for (const part of parts) {
+      if (part !== badge && 'setAlpha' in part) {
+        ;(part as Phaser.GameObjects.GameObject & { setAlpha: (value: number) => void }).setAlpha(0)
+      }
+    }
+
     base.body.add(parts)
     base.core = core
     base.badge = badge
@@ -364,24 +374,25 @@ export class GameScene extends Phaser.Scene {
   private buildHud() {
     this.add
       .rectangle(GAME_WIDTH / 2, TOP_PANEL_Y, GAME_WIDTH - 54, TOP_PANEL_HEIGHT, 0x091323, 0.92)
-      .setStrokeStyle(2, 0x59efff, 0.18)
+      .setAlpha(0.04)
+      .setStrokeStyle(2, 0xd6a64b, 0.1)
       .setDepth(10)
 
     this.playerGoldText = this.add
-      .text(90, TOP_PANEL_Y - 10, 'GOLD 0', {
+      .text(118, TOP_PANEL_Y - 8, 'GOLD 0', {
         fontFamily: 'Trebuchet MS',
         fontSize: '20px',
-        color: '#8ef9ff',
+        color: '#ffe7a6',
         fontStyle: 'bold',
       })
       .setOrigin(0, 0.5)
       .setDepth(11)
 
     this.goldTickText = this.add
-      .text(90, TOP_PANEL_Y + 14, 'Income +16', {
+      .text(118, TOP_PANEL_Y + 16, 'Income +16', {
         fontFamily: 'Trebuchet MS',
         fontSize: '13px',
-        color: '#7ecad2',
+        color: '#cdb784',
       })
       .setOrigin(0, 0.5)
       .setDepth(11)
@@ -389,18 +400,18 @@ export class GameScene extends Phaser.Scene {
     this.playerAgeText = this.add
       .text(GAME_WIDTH / 2, TOP_PANEL_Y - 8, '', {
         fontFamily: 'Trebuchet MS',
-        fontSize: '30px',
-        color: '#f3e5a0',
+        fontSize: '23px',
+        color: '#ffe39a',
         fontStyle: 'bold',
       })
       .setOrigin(0.5)
       .setDepth(11)
 
     this.ageSubtitleText = this.add
-      .text(GAME_WIDTH / 2, TOP_PANEL_Y + 24, 'Tech parity', {
+      .text(GAME_WIDTH / 2, TOP_PANEL_Y + 24, 'Era parity', {
         fontFamily: 'Trebuchet MS',
         fontSize: '12px',
-        color: '#8c8467',
+        color: '#b7a16a',
       })
       .setOrigin(0.5)
       .setDepth(11)
@@ -429,18 +440,18 @@ export class GameScene extends Phaser.Scene {
       .setDepth(12)
 
     this.playerBaseText = this.add
-      .text(318, TOP_PANEL_Y - 10, 'BASE 0', {
+      .text(500, TOP_PANEL_Y + 16, 'BASE 0', {
         fontFamily: 'Trebuchet MS',
-        fontSize: '18px',
+        fontSize: '15px',
         color: '#f2fdff',
         fontStyle: 'bold',
       })
       .setOrigin(0.5)
       .setDepth(11)
     this.enemyBaseText = this.add
-      .text(930, TOP_PANEL_Y - 10, 'ENEMY 0', {
+      .text(1100, TOP_PANEL_Y + 16, 'ENEMY 0', {
         fontFamily: 'Trebuchet MS',
-        fontSize: '18px',
+        fontSize: '15px',
         color: '#ffd4ca',
         fontStyle: 'bold',
       })
@@ -450,27 +461,28 @@ export class GameScene extends Phaser.Scene {
     const muteChip = this.createHudButton(1138, TOP_PANEL_Y, 112, 36, false, true)
     this.hudButtons.set('mute', muteChip)
 
-    this.add.rectangle(318, TOP_PANEL_Y + 16, 176, 8, 0x15283c, 1).setDepth(11)
-    this.add.rectangle(930, TOP_PANEL_Y + 16, 176, 8, 0x2b1b20, 1).setDepth(11)
-    this.playerBaseBar = this.add.rectangle(230, TOP_PANEL_Y + 16, 176, 8, 0x7df7ff, 1).setOrigin(0, 0.5).setDepth(12)
-    this.enemyBaseBar = this.add.rectangle(842, TOP_PANEL_Y + 16, 176, 8, 0xff9d8d, 1).setOrigin(0, 0.5).setDepth(12)
+    this.add.rectangle(407, TOP_PANEL_Y + 26, 176, 8, 0x2d2416, 1).setDepth(11)
+    this.add.rectangle(1038, TOP_PANEL_Y + 26, 176, 8, 0x2d1917, 1).setDepth(11)
+    this.playerBaseBar = this.add.rectangle(319, TOP_PANEL_Y + 26, 176, 8, 0x1ca8d4, 1).setOrigin(0, 0.5).setDepth(12)
+    this.enemyBaseBar = this.add.rectangle(950, TOP_PANEL_Y + 26, 176, 8, 0xe24f37, 1).setOrigin(0, 0.5).setDepth(12)
 
     this.add
       .rectangle(GAME_WIDTH / 2, COMMAND_PANEL_Y, GAME_WIDTH - 54, COMMAND_PANEL_HEIGHT, 0x071220, 0.88)
-      .setStrokeStyle(1, 0x78dfff, 0.08)
+      .setAlpha(0.08)
+      .setStrokeStyle(1, 0xd6a64b, 0.12)
       .setDepth(10)
-    this.add.rectangle(GAME_WIDTH / 2, COMMAND_PANEL_Y - 58, GAME_WIDTH - 80, 2, 0x4f7a8b, 0.12).setDepth(11)
+    this.add.rectangle(GAME_WIDTH / 2, COMMAND_PANEL_Y - 58, GAME_WIDTH - 80, 2, 0xd6a64b, 0.12).setDepth(11)
 
     this.hintText = this.add
-      .text(52, COMMAND_PANEL_Y - 48, 'Tech up before the lane freezes.', {
+      .text(52, COMMAND_PANEL_Y - 48, 'Age up before the lane freezes.', {
         fontFamily: 'Trebuchet MS',
         fontSize: '13px',
-        color: '#7ea2ad',
+        color: '#d9c78f',
       })
       .setOrigin(0, 0.5)
       .setDepth(11)
 
-    const unitStartX = 104
+    const unitStartX = 118
     const unitGap = 120
     const unitY = COMMAND_PANEL_Y + 8
 
@@ -732,6 +744,7 @@ export class GameScene extends Phaser.Scene {
       .setScale(def.scale * UNIT_RENDER_SCALE)
       .setAlpha(0)
       .setDepth(4)
+      .setFlipX(side === 'enemy')
     const healthBar = this.add.graphics().setDepth(7)
     const unit: UnitState = {
       id: this.unitId,
@@ -1151,7 +1164,7 @@ export class GameScene extends Phaser.Scene {
     this.state.audio.play(result === 'victory' ? 'victory' : 'defeat')
 
     const generatedOverlay = this.add.container(GAME_WIDTH / 2, GAME_HEIGHT / 2)
-    const generatedResultArt = this.add.image(0, 0, 'chrono-screen-end').setDisplaySize(GAME_WIDTH, GAME_HEIGHT)
+    const generatedResultArt = this.add.image(0, 0, 'chrono-victory-16x9').setDisplaySize(GAME_WIDTH, GAME_HEIGHT)
     const generatedRestartZone = this.add.zone(-142, 144, 210, 62).setInteractive({ cursor: 'pointer' })
     generatedRestartZone.on('pointerup', () => this.scene.restart())
     const generatedTitleZone = this.add.zone(150, 144, 210, 62).setInteractive({ cursor: 'pointer' })
@@ -1164,7 +1177,7 @@ export class GameScene extends Phaser.Scene {
     const overlay = this.add.container(GAME_WIDTH / 2, GAME_HEIGHT / 2)
     const shade = this.add.rectangle(0, 0, GAME_WIDTH, GAME_HEIGHT, 0x050913, 0.58)
     const resultArt = this.add
-      .image(0, 0, 'chrono-screen-end')
+      .image(0, 0, 'chrono-victory-16x9')
       .setDisplaySize(GAME_WIDTH, GAME_HEIGHT)
       .setAlpha(0.1)
     const halo = this.add.ellipse(0, -80, 520, 120, result === 'victory' ? 0x69d8d2 : 0xe19b77, 0.14)
@@ -1225,8 +1238,8 @@ export class GameScene extends Phaser.Scene {
     this.playerBaseText.setText(`BASE ${Math.max(0, Math.ceil(this.playerBase.hp))}`)
     this.enemyBaseText.setText(`ENEMY ${Math.max(0, Math.ceil(this.enemyBase.hp))}`)
     this.playerAgeText.setText(AGE_NAMES[this.playerAge - 1])
-    this.playerTechText.setText(`T${this.playerAge}`)
-    this.enemyTechText.setText(`T${this.enemyAge}`)
+    this.playerTechText.setText(`A${this.playerAge}`)
+    this.enemyTechText.setText(`A${this.enemyAge}`)
 
     const playerRatio = Phaser.Math.Clamp(this.playerBase.hp / BASE_HEALTH, 0, 1)
     const enemyRatio = Phaser.Math.Clamp(this.enemyBase.hp / BASE_HEALTH, 0, 1)
@@ -1245,26 +1258,26 @@ export class GameScene extends Phaser.Scene {
     const techDiff = this.playerAge - this.enemyAge
 
     if (techDiff > 0) {
-      this.ageSubtitleText.setText(`Tech lead +${techDiff}`)
+      this.ageSubtitleText.setText(`Era lead +${techDiff}`)
       this.ageSubtitleText.setColor('#b8ddb9')
     } else if (techDiff < 0) {
-      this.ageSubtitleText.setText(`Enemy tech lead ${Math.abs(techDiff)}`)
+      this.ageSubtitleText.setText(`Enemy era lead ${Math.abs(techDiff)}`)
       this.ageSubtitleText.setColor('#e4b0a2')
     } else {
-      this.ageSubtitleText.setText('Tech parity')
-      this.ageSubtitleText.setColor('#8c8467')
+      this.ageSubtitleText.setText('Era parity')
+      this.ageSubtitleText.setColor('#b7a16a')
     }
 
     if (techDiff >= 1) {
-      this.hintText.setText('Tech lead is yours. Break them before parity.')
+      this.hintText.setText('Era lead is yours. Break them before parity.')
     } else if (techDiff <= -1) {
-      this.hintText.setText('Enemy tech lead. Reinforce or rush tech.')
+      this.hintText.setText('Enemy era lead. Reinforce or age up.')
     } else if (playerForces === enemyForces) {
-      this.hintText.setText('Even lane. Tech before Age 1 stalls.')
+      this.hintText.setText('Even lane. Age up before Age 1 stalls.')
     } else if (playerPower > enemyPower) {
-      this.hintText.setText('You lead. Push or tech.')
+      this.hintText.setText('You lead. Push or age up.')
     } else {
-      this.hintText.setText('Enemy surge. Reinforce or tech.')
+      this.hintText.setText('Enemy surge. Reinforce or age up.')
     }
 
     const tagAccent = this.playerAge === 1 ? '#2f3d34' : this.playerAge === 2 ? '#243449' : '#4a2f1e'
@@ -1290,7 +1303,7 @@ export class GameScene extends Phaser.Scene {
       button.detail.setText(unlocked ? unit.shortRole : `LOCK ${unit.age}`)
       button.bg.setStrokeStyle(1, accent, disabled ? 0.08 : activeAge ? 0.52 : 0.16)
       button.bg.setData('fillColor', fill)
-      button.bg.setData('fillAlpha', disabled ? 0.78 : 0.9)
+      button.bg.setData('fillAlpha', disabled ? 0.22 : 0.38)
       button.bg.setFillStyle(Number(button.bg.getData('fillColor')), Number(button.bg.getData('fillAlpha')))
       button.accent.setFillStyle(accent, disabled ? 0.06 : 0.72)
       button.cost.setColor(disabled ? '#667a88' : '#fff0b0')
@@ -1303,11 +1316,11 @@ export class GameScene extends Phaser.Scene {
       const canUpgrade = this.playerAge < 3 && this.playerGold >= AGE_UP_COSTS[this.playerAge]
       const lastAge = this.playerAge >= 3
       ageButton.cost.setText(lastAge ? 'MAX' : `${AGE_UP_COSTS[this.playerAge]}g`)
-      ageButton.title.setText(lastAge ? 'Tech Maxed' : 'Age Up')
+      ageButton.title.setText(lastAge ? 'Era Maxed' : 'Age Up')
       ageButton.detail.setText(lastAge ? AGE_NAMES[this.playerAge - 1] : AGE_NAMES[this.playerAge])
       ageButton.bg.setData('fillColor', lastAge ? 0x1b2529 : canUpgrade ? 0x463312 : 0x211a15)
-      ageButton.bg.setData('fillAlpha', 0.94)
-      ageButton.bg.setFillStyle(Number(ageButton.bg.getData('fillColor')), 0.94)
+      ageButton.bg.setData('fillAlpha', 0.46)
+      ageButton.bg.setFillStyle(Number(ageButton.bg.getData('fillColor')), 0.46)
       ageButton.bg.setStrokeStyle(1, 0xffd27c, canUpgrade ? 0.72 : 0.18)
       ageButton.accent.setFillStyle(0xffd27c, canUpgrade ? 0.84 : 0.12)
       ageButton.cost.setColor(lastAge ? '#a5b0b5' : '#fff0b1')
