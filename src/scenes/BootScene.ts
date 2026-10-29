@@ -236,16 +236,23 @@ export class BootScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('chrono-sprite-design', '/assets/ui/chrono-siege-sprite-design.png')
-    this.load.image('chrono-screen-design', '/assets/ui/chrono-siege-screen-design.png')
-    this.load.image('chrono-screen-home', '/assets/ui/chrono-screen-home.png')
-    this.load.image('chrono-screen-end', '/assets/ui/chrono-screen-end.png')
-    this.load.image('chrono-title-16x9', '/assets/ui/chrono-title-16x9.png')
-    this.load.image('chrono-victory-16x9', '/assets/ui/chrono-victory-16x9.png')
-    this.load.image('chrono-battle-16x9', '/assets/ui/chrono-battle-16x9.png')
+    this.load.setPath(`${import.meta.env.BASE_URL}assets/ui/`)
+    this.load.image('chrono-sprite-design', 'chrono-siege-sprite-design.png')
+    this.load.image('chrono-screen-design', 'chrono-siege-screen-design.png')
+    this.load.image('chrono-screen-home', 'chrono-screen-home.png')
+    this.load.image('chrono-screen-end', 'chrono-screen-end.png')
+    this.load.image('chrono-title-16x9', 'chrono-title-16x9.png')
+    this.load.image('chrono-victory-16x9', 'chrono-victory-16x9.png')
+    this.load.image('chrono-battle-16x9', 'chrono-battle-16x9.png')
   }
 
   create() {
+    const required = ['chrono-sprite-design', 'chrono-screen-design', 'chrono-screen-home', 'chrono-screen-end', 'chrono-title-16x9', 'chrono-victory-16x9', 'chrono-battle-16x9']
+    if (required.some(key => !this.textures.exists(key))) {
+      this.add.text(640, 310, 'Battle art could not load.\nCheck your connection, then retry.', { fontSize: '26px', color: '#fff3d0', align: 'center' }).setOrigin(0.5)
+      this.add.text(640, 420, 'RETRY', { fontSize: '28px', backgroundColor: '#315a65', padding: { x: 30, y: 15 } }).setOrigin(0.5).setInteractive({ useHandCursor: true }).on('pointerup', () => location.reload())
+      return
+    }
     for (const unit of UNIT_DEFS) {
       drawUnitTexture(this, `player-${unit.id}`, unit, 'player')
       drawUnitTexture(this, `enemy-${unit.id}`, unit, 'enemy')
