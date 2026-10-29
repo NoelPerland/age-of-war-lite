@@ -373,51 +373,54 @@ export class GameScene extends Phaser.Scene {
 
   private buildHud() {
     this.add
-      .rectangle(GAME_WIDTH / 2, TOP_PANEL_Y, GAME_WIDTH - 54, TOP_PANEL_HEIGHT, 0x091323, 0.92)
-      .setAlpha(0.04)
-      .setStrokeStyle(2, 0xd6a64b, 0.1)
+      .rectangle(GAME_WIDTH / 2, TOP_PANEL_Y, GAME_WIDTH - 54, TOP_PANEL_HEIGHT, 0x091323, 0)
+      .setStrokeStyle(0, 0xd6a64b, 0)
       .setDepth(10)
 
     this.playerGoldText = this.add
-      .text(118, TOP_PANEL_Y - 8, 'GOLD 0', {
+      .text(151, TOP_PANEL_Y - 8, 'GOLD 0', {
         fontFamily: 'Trebuchet MS',
-        fontSize: '20px',
+        fontSize: '18px',
         color: '#ffe7a6',
         fontStyle: 'bold',
       })
-      .setOrigin(0, 0.5)
+      .setOrigin(0.5)
       .setDepth(11)
 
     this.goldTickText = this.add
-      .text(118, TOP_PANEL_Y + 16, 'Income +16', {
+      .text(151, TOP_PANEL_Y + 18, 'Income +16', {
         fontFamily: 'Trebuchet MS',
         fontSize: '13px',
         color: '#cdb784',
       })
-      .setOrigin(0, 0.5)
+      .setOrigin(0.5)
       .setDepth(11)
 
     this.playerAgeText = this.add
-      .text(GAME_WIDTH / 2, TOP_PANEL_Y - 8, '', {
+      .text(GAME_WIDTH / 2, 143, '', {
         fontFamily: 'Trebuchet MS',
-        fontSize: '23px',
+        fontSize: '20px',
         color: '#ffe39a',
         fontStyle: 'bold',
+        backgroundColor: '#111d2b',
       })
+      .setPadding(14, 5, 14, 5)
       .setOrigin(0.5)
       .setDepth(11)
 
     this.ageSubtitleText = this.add
-      .text(GAME_WIDTH / 2, TOP_PANEL_Y + 24, 'Era parity', {
+      .text(GAME_WIDTH / 2, 178, 'Era parity', {
         fontFamily: 'Trebuchet MS',
         fontSize: '12px',
-        color: '#b7a16a',
+        color: '#e5d6ac',
+        backgroundColor: '#111d2b',
       })
+      .setPadding(10, 3, 10, 3)
       .setOrigin(0.5)
       .setDepth(11)
 
     this.playerTechText = this.add
-      .text(430, TOP_PANEL_Y - 10, 'T1', {
+      .text(536, TOP_PANEL_Y + 6, 'T1', {
         fontFamily: 'Trebuchet MS',
         fontSize: '13px',
         color: '#e7f7fb',
@@ -428,7 +431,7 @@ export class GameScene extends Phaser.Scene {
       .setOrigin(0.5)
       .setDepth(12)
     this.enemyTechText = this.add
-      .text(1018, TOP_PANEL_Y - 10, 'T1', {
+      .text(744, TOP_PANEL_Y + 6, 'T1', {
         fontFamily: 'Trebuchet MS',
         fontSize: '13px',
         color: '#fff0e8',
@@ -440,57 +443,62 @@ export class GameScene extends Phaser.Scene {
       .setDepth(12)
 
     this.playerBaseText = this.add
-      .text(500, TOP_PANEL_Y + 16, 'BASE 0', {
+      .text(377, TOP_PANEL_Y + 6, '1280 / 1280', {
         fontFamily: 'Trebuchet MS',
-        fontSize: '15px',
+        fontSize: '14px',
         color: '#f2fdff',
         fontStyle: 'bold',
+        stroke: '#102333',
+        strokeThickness: 3,
       })
       .setOrigin(0.5)
-      .setDepth(11)
+      .setDepth(13)
     this.enemyBaseText = this.add
-      .text(1100, TOP_PANEL_Y + 16, 'ENEMY 0', {
+      .text(903, TOP_PANEL_Y + 6, '1280 / 1280', {
         fontFamily: 'Trebuchet MS',
-        fontSize: '15px',
+        fontSize: '14px',
         color: '#ffd4ca',
         fontStyle: 'bold',
+        stroke: '#321713',
+        strokeThickness: 3,
       })
+      .setOrigin(0.5)
+      .setDepth(13)
+
+    const muteChip = this.createHudButton(1136, TOP_PANEL_Y + 6, 68, 60, false, true)
+    this.hudButtons.set('mute', muteChip)
+
+    this.add.rectangle(377, TOP_PANEL_Y + 6, 248, 14, 0x16202c, 1).setDepth(11)
+    this.add.rectangle(903, TOP_PANEL_Y + 6, 248, 14, 0x2b1a1a, 1).setDepth(11)
+    this.playerBaseBar = this.add.rectangle(253, TOP_PANEL_Y + 6, 248, 14, 0x1ca8d4, 1).setOrigin(0, 0.5).setDepth(12)
+    this.enemyBaseBar = this.add.rectangle(779, TOP_PANEL_Y + 6, 248, 14, 0xe24f37, 1).setOrigin(0, 0.5).setDepth(12)
+
+    this.add
+      .rectangle(GAME_WIDTH / 2, COMMAND_PANEL_Y, GAME_WIDTH - 54, COMMAND_PANEL_HEIGHT, 0x071220, 0)
+      .setStrokeStyle(0, 0xd6a64b, 0)
+      .setDepth(10)
+    this.add.rectangle(GAME_WIDTH / 2, COMMAND_PANEL_Y - 58, GAME_WIDTH - 80, 2, 0xd6a64b, 0).setDepth(11)
+
+    this.hintText = this.add
+      .text(GAME_WIDTH / 2, COMMAND_PANEL_Y - 96, 'Age up before the lane freezes.', {
+        fontFamily: 'Trebuchet MS',
+        fontSize: '13px',
+        color: '#ffe5aa',
+        backgroundColor: '#111d2b',
+      })
+      .setPadding(12, 4, 12, 4)
       .setOrigin(0.5)
       .setDepth(11)
 
-    const muteChip = this.createHudButton(1138, TOP_PANEL_Y, 112, 36, false, true)
-    this.hudButtons.set('mute', muteChip)
-
-    this.add.rectangle(407, TOP_PANEL_Y + 26, 176, 8, 0x2d2416, 1).setDepth(11)
-    this.add.rectangle(1038, TOP_PANEL_Y + 26, 176, 8, 0x2d1917, 1).setDepth(11)
-    this.playerBaseBar = this.add.rectangle(319, TOP_PANEL_Y + 26, 176, 8, 0x1ca8d4, 1).setOrigin(0, 0.5).setDepth(12)
-    this.enemyBaseBar = this.add.rectangle(950, TOP_PANEL_Y + 26, 176, 8, 0xe24f37, 1).setOrigin(0, 0.5).setDepth(12)
-
-    this.add
-      .rectangle(GAME_WIDTH / 2, COMMAND_PANEL_Y, GAME_WIDTH - 54, COMMAND_PANEL_HEIGHT, 0x071220, 0.88)
-      .setAlpha(0.08)
-      .setStrokeStyle(1, 0xd6a64b, 0.12)
-      .setDepth(10)
-    this.add.rectangle(GAME_WIDTH / 2, COMMAND_PANEL_Y - 58, GAME_WIDTH - 80, 2, 0xd6a64b, 0.12).setDepth(11)
-
-    this.hintText = this.add
-      .text(52, COMMAND_PANEL_Y - 48, 'Age up before the lane freezes.', {
-        fontFamily: 'Trebuchet MS',
-        fontSize: '13px',
-        color: '#d9c78f',
-      })
-      .setOrigin(0, 0.5)
-      .setDepth(11)
-
-    const unitStartX = 118
-    const unitGap = 120
-    const unitY = COMMAND_PANEL_Y + 8
+    const unitStartX = 252
+    const unitGap = 137
+    const unitY = COMMAND_PANEL_Y - 2
 
     UNIT_DEFS.forEach((unit, index) => {
-      this.hudButtons.set(unit.id, this.createHudButton(unitStartX + index * unitGap, unitY, 112, 78))
+      this.hudButtons.set(unit.id, this.createHudButton(unitStartX + index * unitGap, unitY, 116, 138))
     })
 
-    this.hudButtons.set('age-up', this.createHudButton(1046, COMMAND_PANEL_Y + 4, 148, 80, true))
+    this.hudButtons.set('age-up', this.createHudButton(1133, COMMAND_PANEL_Y - 2, 142, 138, true))
   }
 
   private createHudButton(
@@ -502,51 +510,51 @@ export class GameScene extends Phaser.Scene {
     compact = false,
   ) {
     const container = this.add.container(x, y).setDepth(12)
-    const shadow = this.add.rectangle(0, 6, width, height, 0x000000, compact ? 0.16 : 0.22)
+    const shadow = this.add.rectangle(0, 6, width, height, 0x000000, 0)
     const hitArea = this.add.zone(0, 0, width + 10, height + 10).setInteractive({ cursor: 'pointer' })
     const bg = this.add
-      .rectangle(0, 0, width, height, 0x112335, 0.96)
-      .setStrokeStyle(1, 0x5feeff, 0.18)
-    const edge = this.add.rectangle(0, -height / 2 + 6, width - 18, 2, 0xffffff, compact ? 0.08 : 0.12)
-    const accent = this.add.rectangle(-width / 2 + 6, 0, 4, height - 14, 0x5feeff, 0.72)
+      .rectangle(0, 0, width, height, 0x112335, 0)
+      .setStrokeStyle(1, 0x5feeff, 0)
+    const edge = this.add.rectangle(0, -height / 2 + 6, width - 18, 2, 0xffffff, 0)
+    const accent = this.add.rectangle(-width / 2 + 6, 0, 4, height - 14, 0x5feeff, 0)
     const cost = this.add
-      .text(-width / 2 + 18, -height / 2 + 16, '', {
+      .text(0, compact ? 0 : 58, '', {
         fontFamily: 'Trebuchet MS',
-        fontSize: compact ? '11px' : '13px',
+        fontSize: '13px',
         color: '#fff0b0',
         fontStyle: 'bold',
       })
-      .setOrigin(0, 0.5)
+      .setOrigin(0.5)
     const title = this.add
-      .text(compact ? -width / 2 + 16 : 0, compact ? -1 : 1, '', {
+      .text(0, compact ? 24 : utility ? -43 : -18, '', {
         fontFamily: 'Trebuchet MS',
-        fontSize: compact ? '14px' : '15px',
+        fontSize: compact ? '12px' : '15px',
         color: '#f6ffff',
         fontStyle: 'bold',
-        align: compact ? 'left' : 'center',
-        wordWrap: { width: compact ? width - 34 : width - 22 },
+        align: 'center',
+        wordWrap: { width: width - 12 },
       })
-      .setOrigin(compact ? 0 : 0.5, 0.5)
+      .setOrigin(0.5)
     const detail = this.add
-      .text(compact ? -width / 2 + 16 : 0, compact ? 15 : 23, '', {
+      .text(0, compact ? 0 : utility ? 42 : 11, '', {
         fontFamily: 'Trebuchet MS',
-        fontSize: compact ? '10px' : '9px',
+        fontSize: compact ? '10px' : '11px',
         color: '#91cada',
-        align: compact ? 'left' : 'center',
-        wordWrap: { width: compact ? width - 34 : width - 22 },
+        align: 'center',
+        wordWrap: { width: width - 12 },
       })
-      .setOrigin(compact ? 0 : 0.5, 0.5)
+      .setOrigin(0.5)
     container.add([shadow, bg, edge, accent, hitArea, cost, title, detail])
     container.setSize(width, height)
     bg.setData('fillColor', 0x112335)
-    bg.setData('fillAlpha', 0.96)
+    bg.setData('fillAlpha', 0)
 
     const resetButtonVisual = (hovered: boolean) => {
       bg.setFillStyle(
         Number(bg.getData('fillColor') ?? 0x112335),
         hovered
-          ? Math.min(1, Number(bg.getData('fillAlpha') ?? 0.96) + 0.08)
-          : Number(bg.getData('fillAlpha') ?? 0.96),
+          ? Math.min(1, Number(bg.getData('fillAlpha') ?? 0) + 0.08)
+          : Number(bg.getData('fillAlpha') ?? 0),
       )
       container.setScale(1)
     }
@@ -560,7 +568,7 @@ export class GameScene extends Phaser.Scene {
     hitArea.on('pointerdown', () => {
       bg.setFillStyle(
         Number(bg.getData('fillColor') ?? 0x112335),
-        Math.min(1, Number(bg.getData('fillAlpha') ?? 0.96) + 0.14),
+        Math.min(1, Number(bg.getData('fillAlpha') ?? 0) + 0.14),
       )
       container.setScale(0.982)
     })
@@ -570,10 +578,6 @@ export class GameScene extends Phaser.Scene {
     hitArea.on('pointerupoutside', () => {
       resetButtonVisual(false)
     })
-
-    if (utility) {
-      detail.setFontSize('11px')
-    }
 
     return { container, hitArea, bg, title, detail, accent, cost }
   }
@@ -1235,16 +1239,16 @@ export class GameScene extends Phaser.Scene {
   private refreshHud() {
     this.playerGoldText.setText(`GOLD ${Math.floor(this.playerGold)}`)
     this.goldTickText.setText(`Income +${Math.round(PASSIVE_GOLD_PER_SECOND * PASSIVE_GOLD_TICK_SECONDS)}`)
-    this.playerBaseText.setText(`BASE ${Math.max(0, Math.ceil(this.playerBase.hp))}`)
-    this.enemyBaseText.setText(`ENEMY ${Math.max(0, Math.ceil(this.enemyBase.hp))}`)
+    this.playerBaseText.setText(`${Math.max(0, Math.ceil(this.playerBase.hp))} / ${BASE_HEALTH}`)
+    this.enemyBaseText.setText(`${Math.max(0, Math.ceil(this.enemyBase.hp))} / ${BASE_HEALTH}`)
     this.playerAgeText.setText(AGE_NAMES[this.playerAge - 1])
     this.playerTechText.setText(`A${this.playerAge}`)
     this.enemyTechText.setText(`A${this.enemyAge}`)
 
     const playerRatio = Phaser.Math.Clamp(this.playerBase.hp / BASE_HEALTH, 0, 1)
     const enemyRatio = Phaser.Math.Clamp(this.enemyBase.hp / BASE_HEALTH, 0, 1)
-    this.playerBaseBar.width = 176 * playerRatio
-    this.enemyBaseBar.width = 176 * enemyRatio
+    this.playerBaseBar.width = 248 * playerRatio
+    this.enemyBaseBar.width = 248 * enemyRatio
 
     const playerForces = this.units.filter((unit) => unit.side === 'player').length
     const enemyForces = this.units.filter((unit) => unit.side === 'enemy').length
@@ -1296,19 +1300,19 @@ export class GameScene extends Phaser.Scene {
       const affordable = this.playerGold >= unit.cost
       const disabled = !unlocked || !affordable
       const activeAge = unit.age === this.playerAge
-      const fill = disabled ? 0x0d1722 : activeAge ? 0x132b3a : 0x0e1d2b
+      const fill = disabled ? 0x0d1722 : activeAge ? 0xecd39e : 0xe5c78d
       const accent = unit.attackKind === 'melee' ? 0x74f7ff : 0xffefad
       button.cost.setText(`${unit.cost}g`)
       button.title.setText(unit.name)
       button.detail.setText(unlocked ? unit.shortRole : `LOCK ${unit.age}`)
-      button.bg.setStrokeStyle(1, accent, disabled ? 0.08 : activeAge ? 0.52 : 0.16)
+      button.bg.setStrokeStyle(1, accent, disabled ? 0.08 : activeAge ? 0.36 : 0.08)
       button.bg.setData('fillColor', fill)
-      button.bg.setData('fillAlpha', disabled ? 0.22 : 0.38)
+      button.bg.setData('fillAlpha', disabled ? 0.36 : 0.04)
       button.bg.setFillStyle(Number(button.bg.getData('fillColor')), Number(button.bg.getData('fillAlpha')))
-      button.accent.setFillStyle(accent, disabled ? 0.06 : 0.72)
-      button.cost.setColor(disabled ? '#667a88' : '#fff0b0')
-      button.title.setColor(disabled ? '#768897' : '#f3ffff')
-      button.detail.setColor(disabled ? '#5d7485' : '#93d5e3')
+      button.accent.setFillStyle(accent, 0)
+      button.cost.setColor(disabled ? '#9fa9ac' : '#fff0b0')
+      button.title.setColor(disabled ? '#d2d9d6' : '#182b33')
+      button.detail.setColor(disabled ? '#a8b6b7' : '#3d5960')
     }
 
     const ageButton = this.hudButtons.get('age-up')
@@ -1316,29 +1320,29 @@ export class GameScene extends Phaser.Scene {
       const canUpgrade = this.playerAge < 3 && this.playerGold >= AGE_UP_COSTS[this.playerAge]
       const lastAge = this.playerAge >= 3
       ageButton.cost.setText(lastAge ? 'MAX' : `${AGE_UP_COSTS[this.playerAge]}g`)
-      ageButton.title.setText(lastAge ? 'Era Maxed' : 'Age Up')
+      ageButton.title.setText('')
       ageButton.detail.setText(lastAge ? AGE_NAMES[this.playerAge - 1] : AGE_NAMES[this.playerAge])
       ageButton.bg.setData('fillColor', lastAge ? 0x1b2529 : canUpgrade ? 0x463312 : 0x211a15)
-      ageButton.bg.setData('fillAlpha', 0.46)
-      ageButton.bg.setFillStyle(Number(ageButton.bg.getData('fillColor')), 0.46)
-      ageButton.bg.setStrokeStyle(1, 0xffd27c, canUpgrade ? 0.72 : 0.18)
-      ageButton.accent.setFillStyle(0xffd27c, canUpgrade ? 0.84 : 0.12)
+      ageButton.bg.setData('fillAlpha', 0)
+      ageButton.bg.setFillStyle(Number(ageButton.bg.getData('fillColor')), 0)
+      ageButton.bg.setStrokeStyle(1, 0xffd27c, 0)
+      ageButton.accent.setFillStyle(0xffd27c, 0)
       ageButton.cost.setColor(lastAge ? '#a5b0b5' : '#fff0b1')
       ageButton.title.setColor(lastAge ? '#c5d2d5' : '#fff7d4')
-      ageButton.detail.setColor(lastAge ? '#8fa0a6' : canUpgrade ? '#ffe6a5' : '#907758')
+      ageButton.detail.setColor(lastAge ? '#b8c5c4' : canUpgrade ? '#ffe6a5' : '#c4ab83')
     }
 
     const muteButton = this.hudButtons.get('mute')
     if (muteButton) {
       const muted = this.state.audio.getMuted()
       muteButton.cost.setText('')
-      muteButton.title.setText(muted ? 'Audio' : 'Audio')
-      muteButton.detail.setText(muted ? 'OFF' : 'ON')
+      muteButton.title.setText(muted ? 'OFF' : 'ON')
+      muteButton.detail.setText('')
       muteButton.bg.setData('fillColor', muted ? 0x3d2620 : 0x14343a)
-      muteButton.bg.setData('fillAlpha', 0.96)
-      muteButton.bg.setFillStyle(Number(muteButton.bg.getData('fillColor')), 0.96)
-      muteButton.bg.setStrokeStyle(1, muted ? 0xffa79a : 0x93fff1, 0.64)
-      muteButton.accent.setFillStyle(muted ? 0xffa79a : 0x93fff1, 0.82)
+      muteButton.bg.setData('fillAlpha', 0)
+      muteButton.bg.setFillStyle(Number(muteButton.bg.getData('fillColor')), 0)
+      muteButton.bg.setStrokeStyle(1, muted ? 0xffa79a : 0x93fff1, 0)
+      muteButton.accent.setFillStyle(muted ? 0xffa79a : 0x93fff1, 0)
       muteButton.title.setColor('#f1ffff')
       muteButton.detail.setColor(muted ? '#ffd2c7' : '#b1fff5')
     }
