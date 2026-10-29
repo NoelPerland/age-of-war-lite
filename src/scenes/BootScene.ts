@@ -171,6 +171,8 @@ function createSheetTexture(
   sh: number,
   width: number,
   height: number,
+  backgroundHole?: [number, number],
+  keepDetached = false,
 ) {
   const source = scene.textures.get(sourceKey).getSourceImage() as HTMLImageElement
   if (scene.textures.exists(key)) {
@@ -183,22 +185,68 @@ function createSheetTexture(
   const context = texture.getContext()
   context.clearRect(0, 0, width, height)
 
-  const scale = Math.min(width / sw, height / sh)
+  const scale = key.startsWith('base-') ? Math.min(width / sw, height / sh) : 0.66
   const dw = Math.round(sw * scale)
   const dh = Math.round(sh * scale)
   const dx = Math.round((width - dw) / 2)
-  const dy = Math.round((height - dh) / 2)
+  const dy = height - dh - 4
   context.drawImage(source, sx, sy, sw, sh, dx, dy, dw, dh)
 
+  // Remove only background connected to the border, preserving enclosed white armor.
   const image = context.getImageData(0, 0, width, height)
-  for (let index = 0; index < image.data.length; index += 4) {
-    const red = image.data[index]
-    const green = image.data[index + 1]
-    const blue = image.data[index + 2]
-    if (red > 232 && green > 232 && blue > 226) {
-      image.data[index + 3] = 0
-    } else if (red > 214 && green > 214 && blue > 208) {
-      image.data[index + 3] = Math.min(image.data[index + 3], 120)
+  const visited = new Uint8Array(width * height)
+  const queue: number[] = []
+  const visit = (pixel: number) => {
+    if (visited[pixel]) return
+    visited[pixel] = 1
+    const index = pixel * 4
+    const background = image.data[index + 3] === 0 ||
+      (image.data[index] > 200 && image.data[index + 1] > 200 && image.data[index + 2] > 195)
+    if (!background) return
+    image.data[index + 3] = 0
+    queue.push(pixel)
+  }
+  for (let x = 0; x < width; x += 1) { visit(x); visit((height - 1) * width + x) }
+  for (let y = 0; y < height; y += 1) { visit(y * width); visit(y * width + width - 1) }
+  if (backgroundHole) {
+    const x = dx + Math.round((backgroundHole[0] - sx) * scale)
+    const y = dy + Math.round((backgroundHole[1] - sy) * scale)
+    visit(y * width + x)
+  }
+  for (let cursor = 0; cursor < queue.length; cursor += 1) {
+    const pixel = queue[cursor]
+    const x = pixel % width
+    if (x > 0) visit(pixel - 1)
+    if (x < width - 1) visit(pixel + 1)
+    if (pixel >= width) visit(pixel - width)
+    if (pixel < width * (height - 1)) visit(pixel + width)
+  }
+  if (backgroundHole && !keepDetached) {
+    // Discard neighboring pose fragments that protrude into the design-board crop.
+    visited.fill(0)
+    let largest: number[] = []
+    for (let start = 0; start < width * height; start += 1) {
+      if (visited[start] || image.data[start * 4 + 3] < 40) continue
+      const component = [start]
+      visited[start] = 1
+      for (let cursor = 0; cursor < component.length; cursor += 1) {
+        const pixel = component[cursor]
+        const x = pixel % width
+        const neighbors = [pixel - width, pixel + width]
+        if (x > 0) neighbors.push(pixel - 1)
+        if (x < width - 1) neighbors.push(pixel + 1)
+        for (const next of neighbors) {
+          if (next < 0 || next >= width * height || visited[next] || image.data[next * 4 + 3] < 40) continue
+          visited[next] = 1
+          component.push(next)
+        }
+      }
+      if (component.length > largest.length) largest = component
+    }
+    visited.fill(0)
+    for (const pixel of largest) visited[pixel] = 1
+    for (let pixel = 0; pixel < visited.length; pixel += 1) {
+      if (!visited[pixel]) image.data[pixel * 4 + 3] = 0
     }
   }
   context.putImageData(image, 0, 0)
@@ -206,24 +254,35 @@ function createSheetTexture(
 }
 
 function createGeneratedArtTextures(scene: Phaser.Scene) {
-  const unitCrops: Record<string, [number, number, number, number]> = {
-    'player-scrapper': [48, 138, 112, 152],
-    'player-pulse-gunner': [1042, 132, 150, 146],
-    'player-bulwark': [452, 118, 120, 168],
-    'player-arc-caster': [878, 132, 142, 146],
-    'player-raider': [624, 118, 132, 168],
-    'player-siege-engine': [1012, 132, 166, 146],
-    'enemy-scrapper': [48, 444, 120, 164],
-    'enemy-pulse-gunner': [1044, 442, 152, 150],
-    'enemy-bulwark': [452, 432, 124, 168],
-    'enemy-arc-caster': [598, 432, 140, 168],
-    'enemy-raider': [856, 442, 142, 150],
-    'enemy-siege-engine': [1018, 442, 170, 150],
+  // The source is a design board, not a uniform sprite grid. Each crop holds one pose.
+  const poses: Record<string, [number, number, number, number][]> = {
+    'player-club': [[38, 125, 124, 162], [156, 118, 138, 169], [280, 127, 140, 160]],
+    'player-guard': [[430, 118, 101, 170], [532, 126, 116, 162], [650, 128, 168, 160]],
+    'player-gunner': [[838, 132, 109, 156], [948, 132, 108, 156], [1058, 134, 168, 154]],
+    'enemy-club': [[34, 450, 126, 166], [154, 440, 138, 176], [280, 460, 140, 156]],
+    'enemy-guard': [[429, 444, 99, 172], [532, 448, 112, 168], [649, 454, 168, 162]],
+    'enemy-gunner': [[836, 457, 109, 159], [946, 458, 108, 158], [1056, 458, 170, 158]],
   }
-
-  Object.entries(unitCrops).forEach(([key, crop]) => {
-    createSheetTexture(scene, key, 'chrono-sprite-design', crop[0], crop[1], crop[2], crop[3], UNIT_TEXTURE_WIDTH, UNIT_TEXTURE_HEIGHT)
-  })
+  const legGaps: Record<string, [number, number][]> = {
+    'player-club': [[85, 265], [210, 265], [335, 265]],
+    'player-guard': [[478, 270], [586, 270], [709, 270]],
+    'player-gunner': [[890, 263], [999, 263], [1118, 263]],
+    'enemy-club': [[84, 593], [210, 593], [335, 593]],
+    'enemy-guard': [[478, 597], [585, 597], [708, 597]],
+    'enemy-gunner': [[889, 595], [998, 595], [1116, 595]],
+  }
+  const archetypes: Record<string, string> = {
+    scrapper: 'club', 'pulse-gunner': 'gunner', bulwark: 'guard',
+    'arc-caster': 'gunner', raider: 'guard', 'siege-engine': 'gunner',
+  }
+  for (const side of ['player', 'enemy']) {
+    for (const [id, archetype] of Object.entries(archetypes)) {
+      poses[`${side}-${archetype}`].forEach((crop, index) => {
+        const suffix = ['', '-walk', '-attack'][index]
+        createSheetTexture(scene, `${side}-${id}${suffix}`, 'chrono-sprite-design', ...crop, UNIT_TEXTURE_WIDTH, UNIT_TEXTURE_HEIGHT, legGaps[`${side}-${archetype}`][index], archetype === 'gunner')
+      })
+    }
+  }
 
   createSheetTexture(scene, 'base-player-age1-art', 'chrono-sprite-design', 30, 774, 248, 198, 178, 126)
   createSheetTexture(scene, 'base-player-age2-art', 'chrono-sprite-design', 344, 774, 250, 198, 178, 126)

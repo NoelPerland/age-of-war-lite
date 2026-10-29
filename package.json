@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "verify:battle": "node scripts/verify-battle.cjs",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "start": "npm run build && node server.js"

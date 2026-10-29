@@ -53,6 +53,9 @@ interface UnitState {
   healthBar: Phaser.GameObjects.Graphics
   hp: number
   attackCooldown: number
+  attackTime: number
+  hitTime: number
+  phase: number
 }
 
 interface ProjectileState {
@@ -490,12 +493,11 @@ export class GameScene extends Phaser.Scene {
       .setOrigin(0.5)
       .setDepth(11)
 
-    const unitStartX = 252
-    const unitGap = 137
+    const unitCenters = [252, 390, 529, 669, 808, 948]
     const unitY = COMMAND_PANEL_Y - 2
 
     UNIT_DEFS.forEach((unit, index) => {
-      this.hudButtons.set(unit.id, this.createHudButton(unitStartX + index * unitGap, unitY, 116, 138))
+      this.hudButtons.set(unit.id, this.createHudButton(unitCenters[index], unitY, 110, 138))
     })
 
     this.hudButtons.set('age-up', this.createHudButton(1133, COMMAND_PANEL_Y - 2, 142, 138, true))
@@ -511,7 +513,7 @@ export class GameScene extends Phaser.Scene {
   ) {
     const container = this.add.container(x, y).setDepth(12)
     const shadow = this.add.rectangle(0, 6, width, height, 0x000000, 0)
-    const hitArea = this.add.zone(0, 0, width + 10, height + 10).setInteractive({ cursor: 'pointer' })
+    const hitArea = this.add.zone(0, 0, width, height).setInteractive({ cursor: 'pointer' })
     const bg = this.add
       .rectangle(0, 0, width, height, 0x112335, 0)
       .setStrokeStyle(1, 0x5feeff, 0)
@@ -528,7 +530,7 @@ export class GameScene extends Phaser.Scene {
     const title = this.add
       .text(0, compact ? 24 : utility ? -43 : -18, '', {
         fontFamily: 'Trebuchet MS',
-        fontSize: compact ? '12px' : '15px',
+        fontSize: compact ? '12px' : '14px',
         color: '#f6ffff',
         fontStyle: 'bold',
         align: 'center',
@@ -758,6 +760,9 @@ export class GameScene extends Phaser.Scene {
       healthBar,
       hp: def.maxHealth,
       attackCooldown: Phaser.Math.FloatBetween(0.05, 0.18),
+      attackTime: 0,
+      hitTime: 0,
+      phase: this.unitId * 1.7,
     }
     this.unitId += 1
     this.units.push(unit)
@@ -769,7 +774,7 @@ export class GameScene extends Phaser.Scene {
     const ratio = Phaser.Math.Clamp(unit.hp / unit.def.maxHealth, 0, 1)
     const width = 52 + unit.def.age * 10
     const x = unit.sprite.x - width / 2
-    const y = unit.sprite.y - 50 - unit.def.age * 4
+    const y = LANE_Y - 56 - unit.def.age * 4
     unit.healthBar.clear()
     unit.healthBar.fillStyle(0x06101b, 0.95)
     unit.healthBar.fillRoundedRect(x - 1, y - 1, width + 2, 8, 3)
@@ -884,7 +889,12 @@ export class GameScene extends Phaser.Scene {
 
   private updateUnits(dt: number) {
     for (const unit of this.units) {
+      if (unit.hp <= 0) continue
+      const previousX = unit.sprite.x
       unit.attackCooldown -= dt
+      unit.attackTime = Math.max(0, unit.attackTime - dt)
+      unit.hitTime = Math.max(0, unit.hitTime - dt)
+      unit.phase += dt * 10
       const targetUnit = this.findTargetUnit(unit)
       const targetBase = targetUnit ? undefined : this.findTargetBase(unit)
       const direction = unit.side === 'player' ? 1 : -1
@@ -900,7 +910,7 @@ export class GameScene extends Phaser.Scene {
         const edgeDistance = Math.abs(unit.sprite.x - targetBase.x) - BASE_BODY_WIDTH / 2
         if (edgeDistance <= unit.def.range + UNIT_STOP_BUFFER && unit.attackCooldown <= 0) {
           this.performAttack(unit, targetBase)
-        } else {
+        } else if (edgeDistance > unit.def.range + UNIT_STOP_BUFFER) {
           unit.sprite.x += direction * unit.def.speed * dt
         }
       } else {
@@ -908,6 +918,15 @@ export class GameScene extends Phaser.Scene {
       }
 
       unit.sprite.x = Phaser.Math.Clamp(unit.sprite.x, PLAYER_BASE_X + 56, ENEMY_BASE_X - 56)
+      const moving = Math.abs(unit.sprite.x - previousX) > 0.01
+      const attacking = unit.attackTime > 0
+      const pose = attacking ? '-attack' : moving && Math.sin(unit.phase) > 0 ? '-walk' : ''
+      unit.sprite.setTexture(`${unit.side}-${unit.def.id}${pose}`)
+      unit.sprite.y = LANE_Y - (moving ? Math.abs(Math.sin(unit.phase)) * 3 : Math.sin(unit.phase * 0.3) * 0.7)
+      unit.sprite.setOrigin(attacking ? 0.5 - direction * 0.045 : 0.5, 0.5)
+      unit.sprite.angle = unit.hitTime > 0 ? -direction * 7 : attacking ? direction * (unit.def.attackKind === 'melee' ? 7 : -4) : moving ? Math.sin(unit.phase) * 2 : 0
+      if (unit.hitTime > 0) unit.sprite.setTintFill(0xffe8b0)
+      else unit.sprite.clearTint()
       this.drawHealthBar(unit)
     }
   }
@@ -937,13 +956,12 @@ export class GameScene extends Phaser.Scene {
 
   private performAttack(attacker: UnitState, target: UnitState | BaseState) {
     attacker.attackCooldown = attacker.def.cooldown
+    attacker.attackTime = Math.min(0.32, attacker.def.cooldown * 0.55)
     if (attacker.def.attackKind === 'melee') {
-      this.tweens.add({
-        targets: attacker.sprite,
-        x: attacker.sprite.x + (attacker.side === 'player' ? 8 : -8),
-        duration: 70,
-        yoyo: true,
-      })
+      const slash = this.add.arc(attacker.sprite.x + (attacker.side === 'player' ? 32 : -32), LANE_Y, 24, -65, 65, false, 0xffe6a1, 0).setDepth(6)
+      slash.setStrokeStyle(3, attacker.side === 'player' ? 0x9ffaff : 0xffae7c, 0.9)
+      slash.setAngle(attacker.side === 'enemy' ? 180 : 0)
+      this.tweens.add({ targets: slash, alpha: 0, scale: 1.4, duration: 180, onComplete: () => slash.destroy() })
       this.applyDamage(target, attacker.def.damage, attacker.side)
       this.flashHit(target)
       this.state.audio.play('hit')
@@ -1073,17 +1091,7 @@ export class GameScene extends Phaser.Scene {
 
   private flashHit(target: UnitState | BaseState) {
     if ('sprite' in target) {
-      const direction = target.side === 'player' ? -1 : 1
-      this.tweens.add({
-        targets: target.sprite,
-        alpha: 0.48,
-        x: target.sprite.x + direction * 8,
-        duration: 82,
-        yoyo: true,
-        scaleX: target.def.scale * UNIT_RENDER_SCALE * 1.04,
-        scaleY: target.def.scale * UNIT_RENDER_SCALE * 0.96,
-        onComplete: () => target.sprite.setScale(target.def.scale * UNIT_RENDER_SCALE),
-      })
+      if (target.hp > 0) target.hitTime = 0.12
       return
     }
 
@@ -1134,7 +1142,8 @@ export class GameScene extends Phaser.Scene {
         survivors.push(unit)
         continue
       }
-      unit.sprite.destroy()
+      this.tweens.killTweensOf(unit.sprite)
+      this.tweens.add({ targets: unit.sprite, alpha: 0, angle: unit.side === 'player' ? -32 : 32, y: LANE_Y + 12, duration: 240, onComplete: () => unit.sprite.destroy() })
       unit.healthBar.destroy()
     }
     this.units = survivors
@@ -1303,7 +1312,7 @@ export class GameScene extends Phaser.Scene {
       const fill = disabled ? 0x0d1722 : activeAge ? 0xecd39e : 0xe5c78d
       const accent = unit.attackKind === 'melee' ? 0x74f7ff : 0xffefad
       button.cost.setText(`${unit.cost}g`)
-      button.title.setText(unit.name)
+      button.title.setText(unit.name.replace(' ', '\n'))
       button.detail.setText(unlocked ? unit.shortRole : `LOCK ${unit.age}`)
       button.bg.setStrokeStyle(1, accent, disabled ? 0.08 : activeAge ? 0.36 : 0.08)
       button.bg.setData('fillColor', fill)
@@ -1387,12 +1396,9 @@ export class GameScene extends Phaser.Scene {
     const color = unit.side === 'player' ? 0x8defff : 0xffb39f
     const ring = this.add.circle(unit.sprite.x, unit.sprite.y + 4, 10, color, 0.14).setDepth(3.8)
     ring.setStrokeStyle(2, color, 0.56)
-    const direction = unit.side === 'player' ? -18 : 18
-    unit.sprite.x += direction
     unit.sprite.setScale(unit.def.scale * UNIT_RENDER_SCALE * 0.76)
     this.tweens.add({
       targets: unit.sprite,
-      x: unit.sprite.x - direction,
       alpha: 1,
       scaleX: unit.def.scale * UNIT_RENDER_SCALE,
       scaleY: unit.def.scale * UNIT_RENDER_SCALE,
@@ -1507,7 +1513,7 @@ export class GameScene extends Phaser.Scene {
     const container = this.add.container(x, y)
     const fill = Phaser.Display.Color.HexStringToColor(colorText).color
     const shadow = this.add.rectangle(0, 6, width, height, 0x2b2014, 0.22)
-    const hitArea = this.add.zone(0, 0, width + 10, height + 10).setInteractive({ cursor: 'pointer' })
+    const hitArea = this.add.zone(0, 0, width, height).setInteractive({ cursor: 'pointer' })
     const bg = this.add
       .rectangle(0, 0, width, height, 0xf0dfbd, 0.98)
       .setStrokeStyle(3, fill, 0.78)
