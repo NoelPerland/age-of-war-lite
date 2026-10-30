@@ -16,6 +16,8 @@ const { chromium } = require('playwright');
     s.playerAge = 3; s.playerGold = 99999;
     ['scrapper', 'pulse-gunner', 'bulwark', 'arc-caster', 'raider', 'siege-engine'].forEach(id => s.onHudButtonPressed(id));
     const definitions = s.units.map(unit => unit.def);
+    const unitLane = s.units.map(unit => ({ id: unit.def.id, y: unit.sprite.y }));
+    for (const unit of unitLane) { if (unit.y !== 392) throw new Error(unit.id + ' not centered over painted road'); }
     const frames = [];
     for (const side of ['player', 'enemy']) for (const def of definitions) for (const suffix of ['', '-walk', '-attack']) {
       const key = `${side}-${def.id}${suffix}`;
@@ -62,10 +64,11 @@ const { chromium } = require('playwright');
   assert(checks.recovered, 'Attack must recover to idle');
   await page.waitForTimeout(6000);
   assert((await page.evaluate(() => window.__AOW_DEBUG__.getState())).score > 0, 'Combat must defeat units');
-  await page.screenshot({ path: '../../outputs/age-combat-repaired.png' });
+  await page.screenshot({ path: process.env.QA_SCREENSHOT || '../work/age-road-desktop.png' });
   for (const [width, height] of [[1920, 1080], [390, 844], [360, 640], [844, 390]]) {
     await page.setViewportSize({ width, height });
     await page.waitForTimeout(150);
+    await page.screenshot({ path: '../work/age-road-' + width + '-' + height + '.png' });
     const fit = await page.locator('canvas').boundingBox();
     assert(fit.x >= -1 && fit.y >= -1 && fit.x + fit.width <= width + 1 && fit.y + fit.height <= height + 1, `Canvas cropped at ${width}x${height}`);
   }

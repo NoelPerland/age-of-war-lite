@@ -25,6 +25,7 @@ import {
   GAME_HEIGHT,
   GAME_WIDTH,
   LANE_Y,
+  UNIT_LANE_Y,
   PASSIVE_GOLD_PER_SECOND,
   PASSIVE_GOLD_TICK_SECONDS,
   PLAYER_BASE_X,
@@ -746,7 +747,7 @@ export class GameScene extends Phaser.Scene {
     const texture = `${side}-${def.id}`
     const spawnX = side === 'player' ? PLAYER_SPAWN_X : ENEMY_SPAWN_X
     const sprite = this.add
-      .image(spawnX, LANE_Y, texture)
+      .image(spawnX, UNIT_LANE_Y, texture)
       .setScale(def.scale * UNIT_RENDER_SCALE)
       .setAlpha(0)
       .setDepth(4)
@@ -774,7 +775,7 @@ export class GameScene extends Phaser.Scene {
     const ratio = Phaser.Math.Clamp(unit.hp / unit.def.maxHealth, 0, 1)
     const width = 52 + unit.def.age * 10
     const x = unit.sprite.x - width / 2
-    const y = LANE_Y - 56 - unit.def.age * 4
+    const y = UNIT_LANE_Y - 56 - unit.def.age * 4
     unit.healthBar.clear()
     unit.healthBar.fillStyle(0x06101b, 0.95)
     unit.healthBar.fillRoundedRect(x - 1, y - 1, width + 2, 8, 3)
@@ -922,7 +923,7 @@ export class GameScene extends Phaser.Scene {
       const attacking = unit.attackTime > 0
       const pose = attacking ? '-attack' : moving && Math.sin(unit.phase) > 0 ? '-walk' : ''
       unit.sprite.setTexture(`${unit.side}-${unit.def.id}${pose}`)
-      unit.sprite.y = LANE_Y - (moving ? Math.abs(Math.sin(unit.phase)) * 3 : Math.sin(unit.phase * 0.3) * 0.7)
+      unit.sprite.y = UNIT_LANE_Y - (moving ? Math.abs(Math.sin(unit.phase)) * 3 : Math.sin(unit.phase * 0.3) * 0.7)
       unit.sprite.setOrigin(attacking ? 0.5 - direction * 0.045 : 0.5, 0.5)
       unit.sprite.angle = unit.hitTime > 0 ? -direction * 7 : attacking ? direction * (unit.def.attackKind === 'melee' ? 7 : -4) : moving ? Math.sin(unit.phase) * 2 : 0
       if (unit.hitTime > 0) unit.sprite.setTintFill(0xffe8b0)
@@ -958,7 +959,7 @@ export class GameScene extends Phaser.Scene {
     attacker.attackCooldown = attacker.def.cooldown
     attacker.attackTime = Math.min(0.32, attacker.def.cooldown * 0.55)
     if (attacker.def.attackKind === 'melee') {
-      const slash = this.add.arc(attacker.sprite.x + (attacker.side === 'player' ? 32 : -32), LANE_Y, 24, -65, 65, false, 0xffe6a1, 0).setDepth(6)
+      const slash = this.add.arc(attacker.sprite.x + (attacker.side === 'player' ? 32 : -32), UNIT_LANE_Y, 24, -65, 65, false, 0xffe6a1, 0).setDepth(6)
       slash.setStrokeStyle(3, attacker.side === 'player' ? 0x9ffaff : 0xffae7c, 0.9)
       slash.setAngle(attacker.side === 'enemy' ? 180 : 0)
       this.tweens.add({ targets: slash, alpha: 0, scale: 1.4, duration: 180, onComplete: () => slash.destroy() })
@@ -1143,7 +1144,7 @@ export class GameScene extends Phaser.Scene {
         continue
       }
       this.tweens.killTweensOf(unit.sprite)
-      this.tweens.add({ targets: unit.sprite, alpha: 0, angle: unit.side === 'player' ? -32 : 32, y: LANE_Y + 12, duration: 240, onComplete: () => unit.sprite.destroy() })
+      this.tweens.add({ targets: unit.sprite, alpha: 0, angle: unit.side === 'player' ? -32 : 32, y: UNIT_LANE_Y + 12, duration: 240, onComplete: () => unit.sprite.destroy() })
       unit.healthBar.destroy()
     }
     this.units = survivors

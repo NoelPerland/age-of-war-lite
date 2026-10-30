@@ -44,6 +44,8 @@ export interface DifficultyConfig {
 export const GAME_WIDTH = 1280
 export const GAME_HEIGHT = 720
 export const LANE_Y = 452
+// Unit textures are center-anchored; keep their feet on the painted road.
+export const UNIT_LANE_Y = LANE_Y - 60
 export const PLAYER_BASE_X = 132
 export const ENEMY_BASE_X = 1148
 export const BASE_BODY_WIDTH = 132
