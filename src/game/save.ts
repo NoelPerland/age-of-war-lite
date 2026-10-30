@@ -15,11 +15,14 @@ const defaultSave: SaveData = {
   difficulty: 'normal',
 }
 
+let sessionSave: SaveData | undefined
+
 export function loadSave(): SaveData {
+  if (sessionSave) return { ...sessionSave }
   try {
     const raw = window.localStorage.getItem(SAVE_KEY)
     if (!raw) {
-      return { ...defaultSave }
+      return { ...(sessionSave ?? defaultSave) }
     }
 
     const parsed = JSON.parse(raw) as Partial<SaveData>
@@ -33,12 +36,17 @@ export function loadSave(): SaveData {
       difficulty: DIFFICULTY_OPTIONS.some((item) => item.id === parsed.difficulty) ? (parsed.difficulty as DifficultyId) : 'normal',
     }
   } catch {
-    return { ...defaultSave }
+    return { ...(sessionSave ?? defaultSave) }
   }
 }
 
 export function writeSave(save: SaveData) {
-  window.localStorage.setItem(SAVE_KEY, JSON.stringify(save))
+  sessionSave = { ...save }
+  try {
+    window.localStorage.setItem(SAVE_KEY, JSON.stringify(save))
+  } catch {
+    // Keep current-tab progress when browser storage is blocked or full.
+  }
 }
 
 export function mergeSave(patch: Partial<SaveData>): SaveData {
